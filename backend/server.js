@@ -7,7 +7,8 @@ const colors = require('colors');
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
 const clientRoutes = require('./routes/clientRoutes');
-const projectRoutes = require('./routes/projectRoutes'); // Import user routes
+const projectRoutes = require('./routes/projectRoutes');
+const invoiceRoutes = require('./routes/invoiceRoutes'); // Import user routes
 
 // Load environment variables from .env file
 dotenv.config();
@@ -30,7 +31,8 @@ app.get('/', (req, res) => {
 // Mount the routes
 app.use('/api/users', userRoutes);
 app.use('/api/clients', clientRoutes); 
-app.use('/api/projects', projectRoutes);// All routes in userRoutes will be prefixed with /api/users
+app.use('/api/projects', projectRoutes);
+app.use('/api/invoices', invoiceRoutes);// All routes in userRoutes will be prefixed with /api/users
 
 // Get the port from environment variables, with a default
 const PORT = process.env.PORT || 5000;

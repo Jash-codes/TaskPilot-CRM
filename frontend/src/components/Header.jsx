@@ -1,5 +1,7 @@
+// src/components/Header.jsx
+
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Make sure this is 'from'
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/auth/authSlice';
 import DarkModeToggle from './DarkModeToggle';
@@ -7,9 +9,7 @@ import DarkModeToggle from './DarkModeToggle';
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
-  // This line is the one that was missing or deleted
-  const { user } = useSelector((state) => state.auth); 
+  const { user } = useSelector((state) => state.auth);
 
   const onLogout = () => {
     dispatch(logout());
@@ -36,6 +36,9 @@ const Header = () => {
                 </li>
                 <li>
                   <Link to="/projects">Projects</Link>
+                </li>
+                <li>
+                  <Link to="/invoices">Invoices</Link> {/* <-- ADDED */}
                 </li>
                 <li>
                   <button className="btn btn-logout" onClick={onLogout}>

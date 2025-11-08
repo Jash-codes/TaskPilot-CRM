@@ -1,7 +1,8 @@
-// controllers/clientController.js
-
 const asyncHandler = require('express-async-handler');
 const Client = require('../models/clientModel');
+const fs = require('fs');
+const csvParser = require('csv-parser');
+const { createObjectCsvWriter } = require('csv-writer');
 
 // @desc    Get all clients for the logged-in user
 // @route   GET /api/clients
@@ -104,10 +105,84 @@ const deleteClient = asyncHandler(async (req, res) => {
   }
 });
 
+// --- NEW FUNCTIONS ---
+
+// @desc    Export clients to CSV
+// @route   GET /api/clients/export
+// @access  Private
+const exportClients = asyncHandler(async (req, res) => {
+  const clients = await Client.find({ user: req.user._id }).lean(); // .lean() is faster
+  const filePath = `uploads/clients-${req.user._id}.csv`;
+
+  const csvWriter = createObjectCsvWriter({
+    path: filePath,
+    header: [
+      { id: 'name', title: 'Name' },
+      { id: 'email', title: 'Email' },
+      { id: 'phone', title: 'Phone' },
+      { id: 'company', title: 'Company' },
+      { id: 'notes', title: 'Notes' },
+    ],
+  });
+
+  await csvWriter.writeRecords(clients);
+
+  res.download(filePath, 'clients.csv', (err) => {
+    if (err) {
+      console.error(err);
+    }
+    // Clean up the temp file after download
+    fs.unlinkSync(filePath);
+  });
+});
+
+// @desc    Import clients from CSV
+// @route   POST /api/clients/import
+// @access  Private
+const importClients = asyncHandler(async (req, res) => {
+  if (!req.file) {
+    res.status(400);
+    throw new Error('No file uploaded');
+  }
+
+  const results = [];
+  const filePath = req.file.path;
+
+  fs.createReadStream(filePath)
+    .pipe(csvParser())
+    .on('data', (data) => results.push(data))
+    .on('end', async () => {
+      // Clean up the uploaded file
+      fs.unlinkSync(filePath);
+
+      // Map results to Client model, adding the logged-in user's ID
+      const newClients = results.map((client) => ({
+        ...client,
+        user: req.user._id,
+      }));
+
+      try {
+        const insertedClients = await Client.insertMany(newClients, { ordered: false });
+        res.status(201).json({
+          message: `${insertedClients.length} clients imported successfully`,
+          count: insertedClients.length,
+        });
+      } catch (error) {
+        res.status(400).json({
+          message: `Error importing clients. ${error.writeErrors?.length || 0} duplicates found.`,
+          error: error.message,
+        });
+      }
+    });
+});
+
+
 module.exports = {
   getClients,
   createClient,
   getClientById,
   updateClient,
   deleteClient,
+  exportClients, // <-- ADDED
+  importClients, // <-- ADDED
 };
