@@ -1,4 +1,23 @@
-# Logs
+# --- Dependencies ---
+node_modules/
+*/node_modules/
+
+# --- Environment Variables (CRITICAL) ---
+# Never commit these to GitHub!
+.env
+.env.local
+.env.*
+*.env
+backend/.env
+frontend/.env
+
+# --- Build Outputs (Frontend) ---
+dist/
+dist-ssr/
+build/
+frontend/dist/
+
+# --- Logs ---
 logs
 *.log
 npm-debug.log*
@@ -7,21 +26,19 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# --- OS & Editor Files ---
 .DS_Store
+.vscode/
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+Thumbs.db
 
-# Environment files
-*.env
+# --- Testing ---
+coverage/
+
+# --- Temporary Files ---
+*.local

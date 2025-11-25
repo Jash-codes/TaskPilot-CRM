@@ -1,0 +1,76 @@
+1. Buttons & Actions
+Primary Button: The main call-to-action (e.g., "Login", "Add Client", "Create Invoice").
+
+Current Style: Solid indigo background, white text.
+
+Class: .btn
+
+Secondary Button: Less important actions (e.g., "Import CSV", "Clear Signature").
+
+Current Style: White background, gray border.
+
+Class: .btn-secondary
+
+Icon Button / Delete: The small "X" or trash icon to remove tasks/items.
+
+Current Style: Transparent background, turns red on hover.
+
+Class: .btn-delete
+
+Toggle Switch: The Dark/Light mode button in the header.
+
+Class: .theme-toggle-btn
+
+2. Cards & Containers
+Stat Cards: The 4 boxes on the Dashboard showing numbers (Total Clients, Revenue, etc.).
+
+Usage: Needs to handle a Title (small) and a Value (big number).
+
+Class: .stat-card
+
+Item Cards: The cards used in lists (Client List, Project List, Invoice List).
+
+Usage: Needs a header (Title + Badge) and a body (Details).
+
+Class: .item-card
+
+Detail Containers: The boxes used on the Project Details page to hold the scope and tasks.
+
+Class: .project-details-card, .project-tasks-card
+
+3. Form Elements
+Input Fields: Standard text boxes (Name, Email, Invoice Number).
+
+HTML: <input type="text">
+
+Dropdowns: Select menus (Status, Choose Client).
+
+HTML: <select>
+
+Text Areas: Large text blocks (Project Scope, Client Notes).
+
+HTML: <textarea>
+
+Checkboxes: The tick box for finishing a task.
+
+HTML: <input type="checkbox">
+
+4. Visual Indicators
+Status Badges: The colored pills showing state (Pending, In Progress, Paid).
+
+Usage: Needs variations for different colors (Green, Yellow, Blue, Red).
+
+Class: .status-badge
+
+Loading Spinner: The animated circle shown while data is fetching.
+
+Class: .spinner
+
+5. Layout Components
+Navbar: The top navigation bar with the Logo and Links.
+
+Class: .header
+
+Chart Container: The box that holds the graphs on the dashboard.
+
+Class: .chart-container

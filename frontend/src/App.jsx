@@ -1,5 +1,3 @@
-// src/App.jsx
-
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -17,12 +15,12 @@ import ClientsPage from './pages/ClientsPage';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectPage from './pages/ProjectPage';
 import InvoicesPage from './pages/InvoicesPage';
-import SignaturePage from './pages/SignaturePage'; // <-- IMPORTED
+import SignaturePage from './pages/SignaturePage';
 
 function App() {
   return (
     <>
-      <ToastContainer autoClose={3000} /> {/* Fixed auto-close prop */}
+      <ToastContainer autoClose={3000} />
       <Header />
       
       <main className="container">
@@ -30,7 +28,7 @@ function App() {
           {/* Public Routes */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/sign" element={<SignaturePage />} /> {/* <-- ADDED ROUTE */}
+          <Route path="/sign" element={<SignaturePage />} />
 
           {/* Private Routes */}
           <Route path="/" element={<PrivateRoute />}>
