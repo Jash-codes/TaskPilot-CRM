@@ -411,3 +411,125 @@ input:focus, textarea:focus {
   font-size: 0.8rem;
   margin-left: 0.5rem;
 }
+
+/* src/index.css - Add to bottom or replace layout sections */
+
+/* --- SIDEBAR UPDATES --- */
+.sidebar {
+  /* ... existing styles ... */
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-nav {
+  flex-grow: 1; /* Pushes the footer to the bottom */
+}
+
+.sidebar-footer {
+  margin-top: auto; /* Ensures it sits at the bottom */
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.sidebar-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem;
+  background: transparent;
+  border: none;
+  color: var(--color-danger-fg); /* Red color for logout */
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: all 0.2s ease;
+}
+
+.sidebar-logout-btn:hover {
+  background-color: var(--color-danger-bg);
+}
+
+/* --- HEADER / PUBLIC NAV UPDATES --- */
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo a {
+  /* Ensure logo is white on dark background if needed, or dark on white */
+  color: var(--color-text); 
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+/* Specific styles for Public Nav (Login/Register) */
+.public-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--color-primary-500);
+}
+
+/* Ensure the header has a transparent or matching background for the auth pages */
+/* If your auth pages are dark blue, we might want a transparent header */
+body:not(:has(.sidebar)) .header {
+  background: transparent;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+/* Force text color to white on the dark auth pages if needed */
+body:not(:has(.sidebar)) .nav-link,
+body:not(:has(.sidebar)) .logo a {
+  color: white;
+}
+
+/* Active State (Blue Highlight like image) */
+.sidebar-nav a.active {
+  background-color: var(--color-primary-50); /* Light Blue BG */
+  color: var(--color-primary-600); /* Blue Text */
+  font-weight: 600;
+}
+
+/* --- MAIN CONTENT AREA --- */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Adjust the Container to fill the remaining space */
+.container {
+  max-width: 1400px; /* Wider for dashboard view */
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem;
+}
+
+/* Hide Sidebar on Mobile (Simple approach) */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none; /* In a real app, you'd toggle this with a hamburger menu */
+  }
+}

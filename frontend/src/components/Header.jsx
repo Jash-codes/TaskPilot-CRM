@@ -1,65 +1,34 @@
 // src/components/Header.jsx
-
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout, reset } from '../features/auth/authSlice';
-import DarkModeToggle from './DarkModeToggle';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-
-  const onLogout = () => {
-    dispatch(logout());
-    dispatch(reset());
-    navigate('/login');
-  };
 
   return (
     <header className="header">
-      <div className="container">
-        <div className="logo">
-          <Link to="/">Taskpilot</Link>
-        </div>
-        <nav>
-          <ul>
-            {user ? (
-              // If user is logged in
-              <>
-                <li>
-                  <Link to="/">Dashboard</Link>
-                </li>
-                <li>
-                  <Link to="/clients">Clients</Link>
-                </li>
-                <li>
-                  <Link to="/projects">Projects</Link>
-                </li>
-                <li>
-                  <Link to="/invoices">Invoices</Link> {/* <-- ADDED */}
-                </li>
-                <li>
-                  <button className="btn btn-logout" onClick={onLogout}>
-                    Logout
-                  </button>
-                </li>
-              </>
-            ) : (
-              // If user is logged out
-              <>
-                <li>
-                  <Link to="/login">Login</Link>
-                </li>
-                <li>
-                  <Link to="/register" className="btn">Register</Link>
-                </li>
-              </>
-            )}
-            <DarkModeToggle />
-          </ul>
-        </nav>
+      <div className="container header-container"> 
+        {/* If user is logged in, show Page Title. If not, show Logo. */}
+        {user ? (
+          <div className="page-title">
+            Dashboard Overview
+          </div>
+        ) : (
+          <div className="logo">
+            <Link to="/">Taskpilot</Link>
+          </div>
+        )}
+
+        {/* Public Navigation (Only show if NOT logged in) */}
+        {!user && (
+          <nav className="public-nav">
+            <ul>
+              <li><Link to="/login" className="nav-link">Login</Link></li>
+              <li><Link to="/register" className="btn btn-small">Register</Link></li>
+            </ul>
+          </nav>
+        )}
       </div>
     </header>
   );
