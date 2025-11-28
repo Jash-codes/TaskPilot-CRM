@@ -1,0 +1,163 @@
+/* Unique Styles for Landing Page */
+
+.landing-container {
+  min-height: 100vh;
+  background: radial-gradient(circle at top right, #0b253a, var(--bg-dark));
+  padding: 0 2rem;
+  overflow: hidden;
+}
+
+/* Nav */
+.landing-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.landing-nav .logo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--color-text);
+  letter-spacing: -1px;
+}
+
+.nav-links { display: flex; gap: 1rem; align-items: center; }
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--color-accent);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: 0.3s;
+  text-decoration: none;
+}
+.btn-primary:hover { background-color: var(--color-accent-hover); transform: translateY(-2px); }
+
+.btn-link { color: var(--color-text-muted); font-weight: 500; text-decoration: none; }
+.btn-link:hover { color: white; }
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  margin-top: 4rem;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* New Title Layout */
+.hero-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem; /* Space between lines */
+  margin-bottom: 1.5rem;
+}
+
+.hero-title-static {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3.5rem;
+  line-height: 1.1;
+  font-weight: 800;
+  margin: 0;
+  color: white;
+}
+
+/* Wrapper for the rotating text */
+.hero-rotating-wrapper {
+  height: 60px; /* Fixed height prevents collapsing */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
+/* The actual badge style passed to the component */
+.rotating-text-badge {
+  background-color: var(--color-accent);
+  color: white;
+  padding: 0.25rem 1.5rem;
+  border-radius: 12px;
+  font-size: 2.5rem; /* Large font for hero */
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(92, 124, 137, 0.3);
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  max-width: 600px;
+  margin: 0 auto 3rem auto;
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 4rem;
+}
+
+.btn-large {
+  background-color: white;
+  color: var(--bg-dark);
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+.btn-large:hover { transform: translateY(-2px); }
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-outline:hover { border-color: white; background: rgba(255,255,255,0.05); }
+
+/* Visuals */
+.hero-visual {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.circle-gradient {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(92,124,137,0.15) 0%, rgba(0,0,0,0) 70%);
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .hero-title-static { font-size: 2.5rem; }
+  .rotating-text-badge { font-size: 1.8rem; padding: 0.25rem 1rem; }
+  .hero-rotating-wrapper { height: 50px; }
+}

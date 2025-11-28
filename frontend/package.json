@@ -12,6 +12,8 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.0",
     "axios": "^1.13.2",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.24",
     "lucide-react": "^0.555.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -20,7 +22,8 @@
     "react-signature-pad-wrapper": "^4.3.0",
     "react-toastify": "^11.0.5",
     "recharts": "^3.5.1",
-    "signature_pad": "^5.1.2"
+    "signature_pad": "^5.1.2",
+    "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
