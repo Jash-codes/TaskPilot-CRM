@@ -6,7 +6,6 @@ import './LandingPage.css';
 const LandingPage = () => {
   return (
     <div className="landing-container">
-      {/* Navbar */}
       <nav className="landing-nav">
         <div className="logo">Taskpilot</div>
         <div className="nav-links">
@@ -15,29 +14,28 @@ const LandingPage = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
       <header className="hero-section">
-        {/* Updated Title Structure */}
-        <div className="hero-title-container">
-          <h1 className="hero-title-static">Manage your</h1>
+        {/* The Flex Container to align Text + Box side-by-side */}
+        <div className="hero-headline-flex">
+          <span className="hero-static-text">Manage your</span>
           
           <div className="hero-rotating-wrapper">
             <RotatingText 
               texts={['Freelance', 'Agency', 'Startup', 'Business']}
-              mainClassName="rotating-text-badge"
-              staggerFrom="last"
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: "-120%", opacity: 0 }}
-              staggerDuration={0.025}
+              mainClassName="rotating-green-box"
+              staggerFrom="first" /* Changed from 'last' to 'first' for natural reading flow */
+              initial={{ y: "100%", opacity: 0 }} /* Start from bottom */
+              animate={{ y: 0, opacity: 1 }}      /* Slide to center */
+              exit={{ y: "-100%", opacity: 0 }}   /* Exit to top (Rolling Up) */
+              staggerDuration={0.1}               /* Slower stagger for a clearer "roll" */
               splitLevelClassName="overflow-hidden pb-1"
-              transition={{ type: "spring", damping: 30, stiffness: 400 }}
-              rotationInterval={2000}
+              transition={{ type: "spring", damping: 20, stiffness: 100 }} /* Smooth spring */
+              rotationInterval={6000} /* Time between words */
             />
           </div>
-
-          <h1 className="hero-title-static">Business with Ease.</h1>
         </div>
+
+        <h1 className="hero-sub-static">Business with Ease.</h1>
 
         <p className="hero-subtitle">
           Invoices, Projects, Clients, and Contracts. All in one place.

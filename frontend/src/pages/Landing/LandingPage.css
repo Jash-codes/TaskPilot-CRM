@@ -45,7 +45,7 @@
 /* Hero Section */
 .hero-section {
   text-align: center;
-  margin-top: 4rem;
+  margin-top: 6rem;
   position: relative;
   z-index: 10;
   display: flex;
@@ -53,46 +53,58 @@
   align-items: center;
 }
 
-/* New Title Layout */
-.hero-title-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem; /* Space between lines */
-  margin-bottom: 1.5rem;
-}
+/* --- THE "Vue Bits" STYLE LAYOUT --- */
 
-.hero-title-static {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 3.5rem;
-  line-height: 1.1;
-  font-weight: 800;
-  margin: 0;
-  color: white;
-}
-
-/* Wrapper for the rotating text */
-.hero-rotating-wrapper {
-  height: 60px; /* Fixed height prevents collapsing */
+/* Container to align "Manage your" + [Box] horizontally */
+.hero-headline-flex {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0.5rem 0;
+  gap: 12px; /* Space between text and box */
+  flex-wrap: wrap; /* Wrap on small mobile screens */
+  margin-bottom: 0.5rem;
 }
 
-/* The actual badge style passed to the component */
-.rotating-text-badge {
-  background-color: var(--color-accent);
+/* "Manage your" text */
+.hero-static-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 800;
   color: white;
-  padding: 0.25rem 1.5rem;
-  border-radius: 12px;
-  font-size: 2.5rem; /* Large font for hero */
-  font-weight: 700;
+  line-height: 1;
+}
+
+/* Wrapper for the component to keep height stable */
+.hero-rotating-wrapper {
+  height: 70px; /* Matches font size + padding */
+  display: flex;
+  align-items: center;
+}
+
+/* THE GREEN BOX STYLE (Exact match to reference) */
+.rotating-green-box {
+  background-color: #22c55e; /* Bright Green */
+  color: white; /* Text inside box */
+  padding: 0 1rem;
+  border-radius: 8px; /* Rounded corners */
+  font-size: 3.5rem;
+  font-weight: 800;
   font-family: 'Montserrat', sans-serif;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 15px rgba(92, 124, 137, 0.3);
+  line-height: 1.1;
+  height: 100%;
+}
+
+/* "Business with Ease" line */
+.hero-sub-static {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: white;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.1;
 }
 
 .hero-subtitle {
@@ -103,6 +115,7 @@
   line-height: 1.6;
 }
 
+/* Buttons */
 .hero-buttons {
   display: flex;
   justify-content: center;
@@ -157,7 +170,10 @@
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .hero-title-static { font-size: 2.5rem; }
-  .rotating-text-badge { font-size: 1.8rem; padding: 0.25rem 1rem; }
-  .hero-rotating-wrapper { height: 50px; }
+  .hero-static-text, .rotating-green-box, .hero-sub-static {
+    font-size: 2.5rem;
+  }
+  .hero-rotating-wrapper {
+    height: 50px;
+  }
 }
