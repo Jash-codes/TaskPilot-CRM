@@ -1,535 +1,68 @@
-/* src/index.css */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
-
 :root {
-  /* Extra O Palette */
-  --bg-dark: #011425;       /* Main Background */
-  --bg-card: #1F4959;       /* Card/Fieldset Background */
-  --color-accent: #5C7C89;  /* Buttons/Progress Active */
-  --color-text: #FFFFFF;    /* Text Color */
-  --color-dark-text: #242424; /* Text inside inputs */
-  --color-muted: #1F4959;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
-  background: var(--bg-dark); /* The Dark Blue from your image */
-  color: var(--color-text);
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center; /* Center everything vertically */
 }
 
-/* --- Multi-Step Form Styles (React Adapted) --- */
-
-.msform-container {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
 }
 
-/* Progress Bar */
-#progressbar {
-  margin-bottom: 30px;
-  overflow: hidden;
-  counter-reset: step;
-  display: flex;
-  justify-content: center;
-  padding: 0;
-}
-
-#progressbar li {
-  list-style-type: none;
-  color: white;
-  text-transform: uppercase;
-  font-size: 9px;
-  width: 33.33%;
-  float: left;
-  position: relative;
-  letter-spacing: 1px;
-  z-index: 10;
-}
-
-#progressbar li:before {
-  content: counter(step);
-  counter-increment: step;
-  width: 24px;
-  height: 24px;
-  line-height: 26px;
-  display: block;
-  font-size: 12px;
-  color: #333;
-  background: white;
-  border-radius: 25px;
-  margin: 0 auto 10px auto;
-}
-
-/* Progress Bar Connectors */
-#progressbar li:after {
-  content: '';
-  width: 100%;
-  height: 2px;
-  background: white; /* Inactive line color */
-  position: absolute;
-  left: -50%;
-  top: 11px;
-  z-index: -1; 
-}
-
-#progressbar li:first-child:after {
-  content: none;
-}
-
-/* Active State */
-#progressbar li.active:before,
-#progressbar li.active:after {
-  background: var(--color-accent);
-  color: white;
-  transition: all 0.3s ease;
-}
-
-/* The Card/Fieldset */
-.auth-card {
-  background: white;
-  border: 0 none;
-  border-radius: 3px;
-  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-  padding: 30px;
-  box-sizing: border-box;
-  width: 100%;
-  position: relative;
-}
-
-/* Headings */
-.fs-title {
-  font-size: 18px;
-  text-transform: uppercase;
-  color: var(--color-dark-text);
-  margin-bottom: 10px;
-  letter-spacing: 2px;
-  font-weight: bold;
-}
-
-.fs-subtitle {
-  font-weight: normal;
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 20px;
-}
-
-/* Inputs */
-input, textarea {
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 0px;
-  margin-bottom: 10px;
-  width: 100%;
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
-  color: var(--color-dark-text);
-  font-size: 13px;
-}
-
-input:focus, textarea:focus {
-  border: 1px solid var(--color-accent);
-  outline: none;
-}
-
-/* Buttons */
-.action-button {
-  width: 100px;
-  background: var(--color-accent);
-  font-weight: bold;
-  color: white;
-  border: 0 none;
-  border-radius: 25px;
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
   cursor: pointer;
-  padding: 10px 5px;
-  margin: 10px 5px;
-  transition: all 0.3s;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
 }
 
-.action-button:hover {
-  background: #4A6572; /* Slightly darker shade of accent */
-  box-shadow: 0 0 0 2px white, 0 0 0 3px var(--color-accent);
-}
-
-.action-button-previous {
-  width: 100px;
-  background: #ccc;
-  font-weight: bold;
-  color: black;
-  border: 0 none;
-  border-radius: 25px;
-  cursor: pointer;
-  padding: 10px 5px;
-  margin: 10px 5px;
-}
-
-.action-button-previous:hover {
-  background: #bbb;
-  box-shadow: 0 0 0 2px white, 0 0 0 3px #ccc;
-}
-
-/* Spinner for loading state */
-.spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border-left-color: var(--color-accent);
-  animation: spin 1s ease infinite;
-  display: inline-block;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Link Style */
-.link-text {
-    color: var(--color-dark-text);
-    margin-top: 15px;
-    font-size: 12px;
-}
-.link-text a {
-    color: var(--color-accent);
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* src/index.css (Add to bottom) */
-
-/* --- Dock Styles --- */
-.dock-container {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: flex-end;
-  height: 80px; /* Reserve space for scaling */
-  z-index: 100;
-  padding-bottom: 10px;
-}
-
-.dock-panel {
-  display: flex;
-  align-items: flex-end;
-  gap: 1rem;
-  padding: 0.75rem 1rem;
-  background-color: rgba(17, 24, 39, 0.8); /* Semi-transparent dark */
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1.5rem;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-}
-
-.dock-item {
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  background-color: #2a2a2a; /* Icon background */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.dock-icon {
-  width: 50%;
-  height: 50%;
-  color: white;
-  pointer-events: none;
-}
-
-/* Tooltip Label */
-.dock-label {
-  position: absolute;
-  top: -40px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #111;
-  color: #fff;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  white-space: nowrap;
-}
-
-.dock-item:hover .dock-label {
-  opacity: 1;
-}
-
-/* --- Advanced Dashboard Layout (Reference Image Style) --- */
-
-.dashboard-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-/* 1. Top Stats Grid */
-.stats-grid-top {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-@media (min-width: 640px) { .stats-grid-top { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .stats-grid-top { grid-template-columns: repeat(4, 1fr); } }
-
-.admin-card {
-  background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius);
-  padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  transition: var(--transition);
-}
-
-.admin-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
-}
-
-.admin-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1rem;
-}
-
-.admin-card-title {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--color-text-secondary);
-}
-
-.admin-card-value {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--color-text);
-  margin-bottom: 0.5rem;
-}
-
-.trend-badge {
-  font-size: 0.85rem;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-.trend-up { color: var(--color-success-text); }
-.trend-down { color: var(--color-danger-fg); }
-
-/* Circle Indicator in Top Right of card */
-.stat-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  font-weight: 700;
-  border: 2px solid;
-}
-.circle-blue { border-color: #3b82f6; color: #3b82f6; }
-.circle-red { border-color: #ef4444; color: #ef4444; }
-.circle-orange { border-color: #f59e0b; color: #f59e0b; }
-.circle-green { border-color: #10b981; color: #10b981; }
-
-/* 2. Main Charts Section */
-.charts-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-@media (min-width: 1024px) {
-  .charts-grid {
-    grid-template-columns: 2fr 1fr; /* 2/3 for main chart, 1/3 for gauge */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
   }
-}
-
-.chart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-.chart-header h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--color-text);
-  margin: 0;
-}
-
-/* 3. Bottom Stats Grid */
-.stats-grid-bottom {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-@media (min-width: 640px) { .stats-grid-bottom { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .stats-grid-bottom { grid-template-columns: repeat(4, 1fr); } }
-
-.bottom-stat-label {
-  font-size: 0.85rem;
-  color: var(--color-text-secondary);
-  margin-bottom: 0.25rem;
-}
-.bottom-stat-value {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--color-text);
-}
-.bottom-stat-trend {
-  font-size: 0.8rem;
-  margin-left: 0.5rem;
-}
-
-/* src/index.css - Add to bottom or replace layout sections */
-
-/* --- SIDEBAR UPDATES --- */
-.sidebar {
-  /* ... existing styles ... */
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar-nav {
-  flex-grow: 1; /* Pushes the footer to the bottom */
-}
-
-.sidebar-footer {
-  margin-top: auto; /* Ensures it sits at the bottom */
-  padding-top: 1rem;
-  border-top: 1px solid var(--color-border);
-}
-
-.sidebar-logout-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  width: 100%;
-  padding: 0.75rem;
-  background: transparent;
-  border: none;
-  color: var(--color-danger-fg); /* Red color for logout */
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  border-radius: var(--border-radius);
-  transition: all 0.2s ease;
-}
-
-.sidebar-logout-btn:hover {
-  background-color: var(--color-danger-bg);
-}
-
-/* --- HEADER / PUBLIC NAV UPDATES --- */
-
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.logo a {
-  /* Ensure logo is white on dark background if needed, or dark on white */
-  color: var(--color-text); 
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 1.5rem;
-}
-
-/* Specific styles for Public Nav (Login/Register) */
-.public-nav ul {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: var(--color-text);
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: color 0.2s;
-}
-
-.nav-link:hover {
-  color: var(--color-primary-500);
-}
-
-/* Ensure the header has a transparent or matching background for the auth pages */
-/* If your auth pages are dark blue, we might want a transparent header */
-body:not(:has(.sidebar)) .header {
-  background: transparent;
-  border-bottom: none;
-  box-shadow: none;
-}
-
-/* Force text color to white on the dark auth pages if needed */
-body:not(:has(.sidebar)) .nav-link,
-body:not(:has(.sidebar)) .logo a {
-  color: white;
-}
-
-/* Active State (Blue Highlight like image) */
-.sidebar-nav a.active {
-  background-color: var(--color-primary-50); /* Light Blue BG */
-  color: var(--color-primary-600); /* Blue Text */
-  font-weight: 600;
-}
-
-/* --- MAIN CONTENT AREA --- */
-.main-content {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-}
-
-/* Adjust the Container to fill the remaining space */
-.container {
-  max-width: 1400px; /* Wider for dashboard view */
-  margin: 0 auto;
-  width: 100%;
-  padding: 2rem;
-}
-
-/* Hide Sidebar on Mobile (Simple approach) */
-@media (max-width: 768px) {
-  .sidebar {
-    display: none; /* In a real app, you'd toggle this with a hamburger menu */
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
   }
 }
