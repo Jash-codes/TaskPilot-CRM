@@ -1,7 +1,8 @@
-import React, { useRef } from 'react'; // Import useRef
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { LayoutDashboard, Users, FileText, PenTool, ShieldCheck, Zap } from 'lucide-react'; // Import Icons
+import { LayoutDashboard, Users, FileText, PenTool, ShieldCheck, Zap } from 'lucide-react'; 
 import RotatingText from '../../components/RotatingText';
+import Footer from '../../components/Footer'; // Import Footer
 import dashboardPreview from '../../assets/dashboard-preview.png';
 import './LandingPage.css';
 
@@ -18,6 +19,7 @@ const LandingPage = () => {
     <div className="landing-container">
       <div className="grid-background"></div>
 
+      {/* --- NAVIGATION --- */}
       <nav className="landing-nav">
         <div className="logo">Taskpilot</div>
         <div className="nav-links">
@@ -29,6 +31,8 @@ const LandingPage = () => {
       {/* --- HERO SECTION --- */}
       <header className="hero-section">
         <div className="hero-content">
+          
+          {/* Headline with Rotating Text */}
           <div className="hero-headline-flex">
             <span className="hero-static-text">Manage your</span>
             <div className="hero-rotating-wrapper">
@@ -56,11 +60,12 @@ const LandingPage = () => {
           
           <div className="hero-buttons">
             <Link to="/register" className="btn-large">Start for Free</Link>
-            {/* 3. Attach Scroll Function */}
+            {/* Scroll to Features on click */}
             <button className="btn-outline" onClick={scrollToDemo}>View Demo</button>
           </div>
         </div>
 
+        {/* 3D Dashboard Mockup */}
         <div className="hero-mockup-container">
           <div className="mockup-glass">
             <div className="mockup-header">
@@ -126,6 +131,9 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+
+      {/* --- FOOTER --- */}
+      <Footer />
 
     </div>
   );

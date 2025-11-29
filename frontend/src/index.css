@@ -1,37 +1,335 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+/* =========================================
+   1. THEME VARIABLES
+========================================= */
 :root {
-  /* Extra O Palette */
+  /* Colors */
   --bg-dark: #011425;
-  --bg-card: #1F4959;
+  --bg-card: #0b253a;
   --bg-sidebar: #000d1a;
-  
   --color-accent: #5C7C89;
-  --color-accent-hover: #4A6572;
   --color-text: #FFFFFF;
   --color-text-muted: #8b9bb4;
   --color-text-dark: #242424;
-  
-  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border: #1e3a52;
 
-  /* Fonts */
-  --font-heading: 'Montserrat', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  /* Status Colors */
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+
+  /* Sizing */
+  --sidebar-width: 260px;
+  --border-radius: 8px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
 }
 
+/* =========================================
+   2. RESET & LAYOUT (CRITICAL FIXES HERE)
+========================================= */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
+  font-family: 'Inter', sans-serif;
   background-color: var(--bg-dark);
   color: var(--color-text);
-  font-family: var(--font-body);
   line-height: 1.6;
+  overflow-x: hidden; 
 }
 
-a { text-decoration: none; color: inherit; }
+/* --- THE MAIN LAYOUT CONTAINER --- */
+/* This forces the Sidebar and Content to sit Side-by-Side */
+.app-container {
+  display: flex !important; /* Force flexbox */
+  flex-direction: row !important; /* Force horizontal alignment */
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden; /* Stop page scroll, let content scroll */
+}
 
+/* --- THE SIDEBAR --- */
+.sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width); /* Prevent crushing */
+  height: 100vh;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  overflow-y: auto; /* Scrollable sidebar if needed */
+}
 
-/* Accessibility Utility: Hides text visually but keeps it for screen readers */
+/* --- THE MAIN CONTENT AREA --- */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto; /* Scrollable content area */
+  width: calc(100% - var(--sidebar-width));
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* =========================================
+   3. SIDEBAR COMPONENTS
+========================================= */
+.sidebar-brand {
+  display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2.5rem; padding-left: 0.5rem;
+}
+.logo-icon {
+  width: 36px; height: 36px; background: var(--color-accent); color: white;
+  border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700;
+}
+.sidebar-brand h2 { font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 700; margin: 0; }
+
+.nav-group h3 {
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--color-text-muted); margin-bottom: 0.75rem; padding-left: 0.75rem; font-weight: 600;
+}
+.sidebar-nav ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.sidebar-nav a {
+  display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem;
+  border-radius: var(--border-radius); color: var(--color-text-muted);
+  text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: 0.2s;
+}
+.sidebar-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.05); color: white;
+}
+.sidebar-nav a.active {
+  background-color: var(--color-accent); color: white;
+}
+
+.sidebar-footer { margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+.sidebar-logout-btn {
+  display: flex; align-items: center; gap: 0.75rem; width: 100%; padding: 0.75rem;
+  background: transparent; border: none; color: var(--color-danger);
+  font-weight: 600; cursor: pointer; transition: 0.2s;
+}
+.sidebar-logout-btn:hover { background-color: rgba(239, 68, 68, 0.1); border-radius: var(--border-radius); }
+
+/* =========================================
+   4. ADVANCED SIDEBAR STYLES (SaaS Level)
+========================================= */
+.sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  height: 100vh;
+  background-color: var(--bg-sidebar); 
+  /* Subtle gradient for depth */
+  background-image: linear-gradient(180deg, var(--bg-sidebar) 0%, #000810 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem; /* Slightly reduced horizontal padding for cleaner look */
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: width 0.3s ease;
+}
+
+/* --- Brand Section --- */
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+  padding: 0 0.5rem;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--color-accent) 0%, #3b5a69 100%);
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.4rem;
+  box-shadow: 0 4px 15px rgba(92, 124, 137, 0.3); /* Glow effect */
+}
+
+.sidebar-brand h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+/* --- Navigation Groups --- */
+.nav-group {
+  margin-bottom: 2rem;
+}
+
+.nav-group h3 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px; /* Wider tracking for elegance */
+  color: #5c6b7f; /* Muted slate color */
+  margin-bottom: 0.8rem;
+  padding-left: 1rem;
+  font-weight: 700;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* --- Navigation Links --- */
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  color: #94a3b8; /* Default text color */
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-nav a svg {
+  stroke-width: 2px;
+  transition: transform 0.2s ease;
+  color: #64748b;
+}
+
+/* Hover State */
+.sidebar-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+  color: white;
+}
+
+.sidebar-nav a:hover svg {
+  color: var(--color-accent);
+  transform: translateX(3px); /* Subtle movement */
+}
+
+/* --- ACTIVE STATE (The "Advanced" Look) --- */
+.sidebar-nav a.active {
+  /* Fading Gradient Background */
+  background: linear-gradient(90deg, rgba(92, 124, 137, 0.15) 0%, rgba(92, 124, 137, 0) 100%);
+  color: white;
+  font-weight: 600;
+}
+
+.sidebar-nav a.active svg {
+  color: var(--color-accent); /* Icon lights up */
+}
+
+/* The Glowing Left Border Indicator */
+.sidebar-nav a.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 3px;
+  background-color: var(--color-accent);
+  border-radius: 0 4px 4px 0;
+  box-shadow: 2px 0 10px var(--color-accent); /* Glow */
+}
+
+/* --- Footer & Logout --- */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #ef4444; /* Red Text */
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.sidebar-logout-btn svg {
+  stroke-width: 2.5px;
+}
+
+.sidebar-logout-btn:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.1);
+}
+
+/* =========================================
+   5. HEADER & PUBLIC
+========================================= */
+.header {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--color-border);
+  padding: 1rem 0; flex-shrink: 0;
+}
+.header-container { display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+.page-title { font-weight: 600; font-size: 1.25rem; color: white; }
+
+/* Landing Page Specifics */
+.nav-link { color: white; text-decoration: none; font-weight: 600; }
+.btn-small { 
+  background: var(--color-accent); color: white; padding: 0.5rem 1rem; 
+  border-radius: 4px; text-decoration: none; font-weight: 600; 
+}
+
+/* =========================================
+   6. FORMS
+========================================= */
+.msform-container { width: 100%; max-width: 500px; margin: 50px auto; text-align: center; }
+.auth-card {
+  background: white; color: var(--color-text-dark);
+  padding: 2rem; border-radius: 8px; box-shadow: var(--shadow-sm);
+}
+.fs-title { color: var(--color-text-dark); margin-bottom: 1rem; font-weight: 700; font-size: 1.5rem; }
+input { 
+  width: 100%; padding: 0.75rem; border: 1px solid #ccc; 
+  border-radius: 4px; margin-bottom: 1rem; color: #333;
+}
+.action-button {
+  width: 100%; padding: 0.75rem; background: var(--color-accent);
+  color: white; border: none; border-radius: 25px; font-weight: bold; cursor: pointer;
+}
+
+/* =========================================
+   7. RESPONSIVE MOBILE
+========================================= */
+@media (max-width: 768px) {
+  .sidebar { display: none; } /* Hide sidebar on mobile */
+  .main-content { width: 100%; margin-left: 0; }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

@@ -1,10 +1,11 @@
+// src/pages/Auth/LoginPage.jsx
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { login, reset } from '../../features/auth/authSlice';
 import { Mail, Lock, ArrowRight, Github, Chrome } from 'lucide-react';
-import './Auth.css'; // Reusing the shared Auth styles
+import './Auth.css';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -25,8 +26,11 @@ const LoginPage = () => {
       toast.error(message);
     }
 
+    // --- THE FIX IS HERE ---
+    // Previously it might have been navigate('/')
+    // We must force it to go to the protected dashboard
     if (isSuccess || user) {
-      navigate('/'); // Go to Dashboard/Home
+      navigate('/dashboard'); 
     }
 
     dispatch(reset());
@@ -47,7 +51,7 @@ const LoginPage = () => {
   return (
     <div className="auth-page-wrapper">
       
-      {/* LEFT SIDE: Branding (Different quote for Login) */}
+      {/* LEFT SIDE: Branding */}
       <div className="auth-brand-section">
         <div className="brand-content">
           <h1 className="brand-logo">Taskpilot.</h1>
@@ -95,11 +99,9 @@ const LoginPage = () => {
               />
             </div>
 
-            {/* Remember Me & Forgot Password Row */}
             <div className="form-actions-row">
               <label className="checkbox-container">
                 <input type="checkbox" />
-                <span className="checkmark"></span>
                 Remember me
               </label>
               <Link to="#" className="forgot-password">Forgot Password?</Link>
