@@ -5,7 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // Import Pages
 import LandingPage from './pages/Landing/LandingPage';
-import RegisterPage from './pages/Auth/RegisterPage'; // <-- IMPORT THIS
+import RegisterPage from './pages/Auth/RegisterPage'; 
+import LoginPage from './pages/Auth/LoginPage'; 
 
 function App() {
   return (
@@ -14,8 +15,8 @@ function App() {
       
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/register" element={<RegisterPage />} /> {/* <-- ADD ROUTE */}
-        {/* We will add /login and /dashboard next */}
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} /> 
       </Routes>
     </>
   );

@@ -18,7 +18,6 @@
   overflow: hidden;
 }
 
-/* Subtle gradient orb for visual interest */
 .auth-brand-section::before {
   content: '';
   position: absolute;
@@ -69,7 +68,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white; /* Clean white background */
+  background-color: white;
   padding: 2rem;
 }
 
@@ -96,42 +95,55 @@
   font-size: 0.95rem;
 }
 
-/* Modern Inputs with Icons */
+/* --- UPDATED INPUT STYLES --- */
 .input-group-icon {
   position: relative;
   margin-bottom: 1rem;
 }
 
+/* 1. Update Icon Color */
 .input-icon {
   position: absolute;
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #9ca3af;
+  color: var(--color-accent); /* Use theme color instead of gray */
+  opacity: 0.6; /* Subtle by default */
+  transition: all 0.2s;
+  z-index: 10;
 }
 
+/* 2. Update Input Borders */
 .input-group-icon input {
   width: 100%;
-  padding: 0.875rem 1rem 0.875rem 3rem; /* Extra padding-left for icon */
-  border: 1px solid #e5e7eb;
+  padding: 0.875rem 1rem 0.875rem 3rem;
+  /* Use a subtle, transparent version of the accent color for the border */
+  border: 2px solid rgba(92, 124, 137, 0.15); 
   border-radius: 8px;
   font-size: 0.95rem;
   outline: none;
   transition: all 0.2s;
   color: var(--color-text-dark);
-  background: white; /* Ensure white bg */
+  background: white;
+  font-family: 'Inter', sans-serif;
 }
 
+/* 3. Update Focus State (When clicked) */
 .input-group-icon input:focus {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(92, 124, 137, 0.15);
+  border-color: var(--color-accent); /* Solid accent color on focus */
+  box-shadow: 0 0 0 4px rgba(92, 124, 137, 0.1); /* Subtle matching glow */
 }
 
-/* Primary Button */
+/* 4. Brighten Icon on Focus */
+.input-group-icon:focus-within .input-icon {
+  opacity: 1;
+}
+
+/* --- Buttons & Extra --- */
 .btn-auth-primary {
   width: 100%;
   padding: 0.875rem;
-  background-color: var(--color-text-dark); /* Black button for high contrast */
+  background-color: var(--color-text-dark);
   color: white;
   border: none;
   border-radius: 8px;
@@ -147,10 +159,9 @@
 }
 
 .btn-auth-primary:hover {
-  background-color: #000;
+  background-color: var(--color-accent); /* Hover turns blue/teal */
 }
 
-/* Divider */
 .auth-divider {
   display: flex;
   align-items: center;
@@ -172,7 +183,6 @@
   padding: 0 1rem;
 }
 
-/* Social Buttons */
 .social-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -187,7 +197,7 @@
   gap: 0.5rem;
   padding: 0.75rem;
   background: white;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #e5e7eb; /* Keep social buttons neutral */
   border-radius: 8px;
   font-weight: 500;
   color: var(--color-text-dark);
@@ -197,9 +207,9 @@
 
 .btn-social:hover {
   background-color: #f9fafb;
+  border-color: var(--color-accent);
 }
 
-/* Redirect Link */
 .auth-redirect {
   text-align: center;
   font-size: 0.9rem;
@@ -216,13 +226,42 @@
   text-decoration: underline;
 }
 
+/* Login Specific */
+.form-actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-dark);
+}
+
+.forgot-password {
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-container input {
+  accent-color: var(--color-accent);
+  width: 16px;
+  height: 16px;
+}
+
 /* Desktop Styles */
 @media (min-width: 1024px) {
   .auth-page-wrapper {
-    grid-template-columns: 1fr 1fr; /* 50/50 Split */
+    grid-template-columns: 1fr 1fr;
   }
-  
   .auth-brand-section {
-    display: flex; /* Show brand on desktop */
+    display: flex;
   }
 }
