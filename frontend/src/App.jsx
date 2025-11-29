@@ -3,8 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Import Pages (Modular)
+// Import Pages
 import LandingPage from './pages/Landing/LandingPage';
+import RegisterPage from './pages/Auth/RegisterPage'; // <-- IMPORT THIS
 
 function App() {
   return (
@@ -12,10 +13,9 @@ function App() {
       <ToastContainer />
       
       <Routes>
-        {/* Route for the Landing Page (Root URL) */}
         <Route path="/" element={<LandingPage />} />
-        
-        {/* We will add /login and /register routes next */}
+        <Route path="/register" element={<RegisterPage />} /> {/* <-- ADD ROUTE */}
+        {/* We will add /login and /dashboard next */}
       </Routes>
     </>
   );

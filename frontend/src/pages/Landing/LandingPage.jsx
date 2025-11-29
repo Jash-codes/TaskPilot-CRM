@@ -30,7 +30,7 @@ const LandingPage = () => {
               staggerDuration={0.1}               /* Slower stagger for a clearer "roll" */
               splitLevelClassName="overflow-hidden pb-1"
               transition={{ type: "spring", damping: 20, stiffness: 100 }} /* Smooth spring */
-              rotationInterval={6000} /* Time between words */
+              rotationInterval={3000} /* Time between words */
             />
           </div>
         </div>
