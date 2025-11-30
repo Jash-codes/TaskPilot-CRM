@@ -49,4 +49,4 @@ export const projectSlice = createSlice({
 });
 
 export const { reset } = projectSlice.actions;
-export default projectSlice.reducer;
+export default projectSlice.reducer;    

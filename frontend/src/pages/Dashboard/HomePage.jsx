@@ -8,6 +8,8 @@ import {
   Cell,
   LineChart,
   Line,
+  BarChart, // <-- Added BarChart
+  Bar,      // <-- Added Bar
   XAxis,
   YAxis,
   CartesianGrid,
@@ -15,7 +17,6 @@ import {
   Legend
 } from 'recharts';
 import Spinner from '../../components/Spinner';
-import LiveChart from '../../components/LiveChart';
 import { getProjects } from '../../features/projects/projectSlice';
 import { getClients } from '../../features/clients/clientSlice';
 
@@ -41,19 +42,28 @@ const HomePage = () => {
   const pendingProjects = projects.filter(p => p.status === 'Pending').length;
   const activeProjects = projects.filter(p => p.status === 'In Progress').length;
 
-  // --- CHART DATA 1: PIE (Status) ---
+  // --- CHART 1 DATA: PIE (Status) ---
   const pieData = [
-    { name: 'Pending', value: pendingProjects, color: '#f59e0b' },   // Orange
-    { name: 'In Progress', value: activeProjects, color: '#3b82f6' }, // Blue
-    { name: 'Finished', value: completedProjects, color: '#10b981' }, // Green
-  ].filter(item => item.value > 0); // Hide empty slices
+    { name: 'Pending', value: pendingProjects, color: '#f59e0b' },
+    { name: 'In Progress', value: activeProjects, color: '#3b82f6' },
+    { name: 'Finished', value: completedProjects, color: '#10b981' },
+  ].filter(item => item.value > 0);
 
-  // --- CHART DATA 2: LINE (Performance/Budget Trend) ---
-  // We'll map the last 5 projects to show a "trend" of budget size
-  const lineData = projects.slice(0, 5).map((p, i) => ({
+  // --- CHART 2 DATA: LINE (Recent Projects Budget) ---
+  const lineData = projects.slice(0, 5).map((p) => ({
     name: p.title.substring(0, 8) + '...',
-    Performance: p.budget, // Using Budget as a performance metric
+    Budget: p.budget,
   }));
+
+  // --- CHART 3 DATA: BAR (Monthly Revenue - Mock Data for Demo) ---
+  const revenueData = [
+    { month: 'Jan', revenue: 4000 },
+    { month: 'Feb', revenue: 3000 },
+    { month: 'Mar', revenue: 5500 },
+    { month: 'Apr', revenue: 4500 },
+    { month: 'May', revenue: 6000 },
+    { month: 'Jun', revenue: totalBudget > 0 ? totalBudget : 7500 }, // Use real total for current month
+  ];
 
   return (
     <div className="dashboard-container">
@@ -91,10 +101,10 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* --- CHARTS ROW (Simple Pie & Line) --- */}
+      {/* --- MIDDLE ROW: PIE & LINE CHARTS --- */}
       <div className="charts-grid">
         
-        {/* CHART 1: Project Status Pie */}
+        {/* Project Status Pie */}
         <div className="admin-card">
           <div className="chart-header">
             <h3>Project Status</h3>
@@ -124,10 +134,10 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* CHART 2: Performance Line */}
+        {/* Project Budget Trend */}
         <div className="admin-card">
           <div className="chart-header">
-            <h3>Performance Trend (Budget)</h3>
+            <h3>Recent Projects Value</h3>
           </div>
           <div style={{ height: '300px', width: '100%' }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -140,7 +150,7 @@ const HomePage = () => {
                 />
                 <Line 
                   type="monotone" 
-                  dataKey="Performance" 
+                  dataKey="Budget" 
                   stroke="#5C7C89" 
                   strokeWidth={3} 
                   dot={{r: 6, fill: '#5C7C89'}} 
@@ -153,9 +163,25 @@ const HomePage = () => {
 
       </div>
 
-      {/* --- LIVE TRAFFIC --- */}
-      <div style={{ marginBottom: '2rem' }}>
-        <LiveChart />
+      {/* --- BOTTOM ROW: REVENUE HISTORY (REPLACED LIVE TRAFFIC) --- */}
+      <div className="admin-card" style={{ marginBottom: '2rem' }}>
+        <div className="chart-header">
+          <h3>Revenue History (6 Months)</h3>
+        </div>
+        <div style={{ height: '300px', width: '100%' }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={revenueData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#1e3a52" vertical={false} />
+              <XAxis dataKey="month" tick={{fontSize: 12, fill: '#8b9bb4'}} axisLine={false} tickLine={false} />
+              <YAxis tick={{fontSize: 12, fill: '#8b9bb4'}} axisLine={false} tickLine={false} />
+              <Tooltip 
+                cursor={{fill: 'rgba(255,255,255,0.05)'}}
+                contentStyle={{ backgroundColor: '#0b253a', border: '1px solid #1e3a52', borderRadius: '8px' }}
+              />
+              <Bar dataKey="revenue" fill="#5C7C89" radius={[4, 4, 0, 0]} barSize={40} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
 
     </div>
