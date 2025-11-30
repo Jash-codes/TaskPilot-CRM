@@ -37,7 +37,7 @@ const LandingPage = () => {
             <span className="hero-static-text">Manage your</span>
             <div className="hero-rotating-wrapper">
               <RotatingText 
-                texts={['Freelance', 'Agency', 'Startup', 'Business']}
+                texts={['Freelance', 'Agency', 'Startup',]}
                 mainClassName="rotating-green-box"
                 staggerFrom="first"
                 initial={{ y: "100%", opacity: 0 }}

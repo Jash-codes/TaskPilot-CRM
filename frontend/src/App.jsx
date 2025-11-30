@@ -14,6 +14,7 @@ import LandingPage from './pages/Landing/LandingPage';
 import RegisterPage from './pages/Auth/RegisterPage';
 import LoginPage from './pages/Auth/LoginPage';
 import HomePage from './pages/Dashboard/HomePage';
+import ClientsPage from './pages/Clients/ClientsPage'; // <-- Import
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -46,7 +47,7 @@ function App() {
             {/* Protected Routes */}
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<HomePage />} />
-              {/* We'll add Clients/Projects routes here in Day 3 */}
+             <Route path="/clients" element={<ClientsPage />} /> 
             </Route>
           </Routes>
         </main>

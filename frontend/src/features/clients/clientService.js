@@ -7,6 +7,7 @@ const getToken = (getState) => {
   return auth.user?.token;
 };
 
+// Get user clients
 const getClients = async (thunkAPI) => {
   const token = getToken(thunkAPI.getState);
   const config = {
@@ -18,8 +19,21 @@ const getClients = async (thunkAPI) => {
   return response.data;
 };
 
+// Create new client (ADDED THIS)
+const createClient = async (clientData, thunkAPI) => {
+  const token = getToken(thunkAPI.getState);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.post(API_URL, clientData, config);
+  return response.data;
+};
+
 const clientService = {
   getClients,
+  createClient, // <-- Export it
 };
 
 export default clientService;
