@@ -1,225 +1,247 @@
 /* src/pages/Clients/Clients.css */
 
 .clients-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  padding: 2rem;
   width: 100%;
-  animation: fadeIn 0.4s ease-out;
+  animation: fadeIn 0.5s ease-out;
 }
 
-/* --- HEADER SECTION --- */
+/* --- HEADER --- */
 .clients-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .clients-header h1 {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.75rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
   font-weight: 700;
   color: white;
-  letter-spacing: -0.025em;
-  margin: 0;
 }
 
 .clients-header .btn {
-  background: white;
-  color: var(--bg-dark);
-  border: 1px solid white;
-  font-weight: 600;
-  transition: all 0.2s ease;
-}
-.clients-header .btn:hover {
   background: var(--color-accent);
-  border-color: var(--color-accent);
   color: white;
-}
-
-/* --- FORM CONTAINER --- */
-.client-form-container {
-  background-color: rgba(31, 73, 89, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  margin-bottom: 2rem;
-  animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
-}
-
-.form-row-group {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.client-form-container input {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: white;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
-}
-
-.client-form-container input:focus {
-  background: rgba(0, 0, 0, 0.4);
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 4px rgba(92, 124, 137, 0.15);
-}
-
-/* --- CLIENTS GRID --- */
-.clients-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 1.5rem;
-}
-
-/* --- CARD DESIGN --- */
-.client-card {
-  background-color: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 1.5rem;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  min-height: 220px; /* Increased height for breathing room */
-}
-
-.client-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(92, 124, 137, 0.4);
-  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.4);
-  background-color: #235263;
-}
-
-.client-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.client-avatar {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--color-accent);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 1.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.client-info {
-  flex: 1;
-  min-width: 0; /* Critical for text truncation in flexbox */
-}
-
-.client-info h3 {
-  font-size: 1.1rem;
+  border: none;
   font-weight: 600;
-  color: white;
-  margin: 0;
-  line-height: 1.2;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.client-info span {
-  font-size: 0.85rem;
-  color: #94a3b8;
-  display: block;
-  margin-top: 2px;
-}
-
-.client-details {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.detail-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: #cbd5e1;
-  font-size: 0.9rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.detail-row svg {
-  color: var(--color-accent);
-  opacity: 0.7;
-  flex-shrink: 0;
-}
-
-/* --- THE FIX IS HERE --- */
-.view-projects-link {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  color: var(--color-accent);
-  font-size: 0.9rem;
-  font-weight: 600;
-  
-  /* Flexbox centering + NO WRAPPING */
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  white-space: nowrap; /* <-- This forces it to stay on one line */
-  
-  cursor: pointer;
-  transition: all 0.2s;
-  width: fit-content; /* Only take up needed space */
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
 }
 
-.view-projects-link:hover {
-  gap: 0.75rem;
-  color: white;
-}
-
-/* Empty State */
-.clients-grid p {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 4rem;
-  background: rgba(255, 255, 255, 0.02);
+/* --- FORM (Keep existing form styles) --- */
+.client-form-container {
+  background-color: #0b253a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
   border-radius: 12px;
-  border: 1px dashed rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
+  animation: slideDown 0.3s ease-out;
+}
+.form-row-group { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+.client-form-container input {
+  background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: white;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* --- THE NEW CARD GRID --- */
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding-bottom: 2rem;
 }
 
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-10px); height: 0; }
-  to { opacity: 1; transform: translateY(0); height: auto; }
+/* --- FUTURISTIC CARD STYLES --- */
+.client-card {
+  position: relative;
+  z-index: 1;
+  min-height: 20rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #151419;
+  border-radius: 2.25rem;
+  box-shadow: 1px 12px 25px rgba(0, 0, 0, 0.78);
+  overflow: hidden; /* Important for border radius */
+  padding-bottom: 4rem; /* Space for footer */
+  transition: transform 0.3s ease;
 }
 
+.client-card:hover {
+  transform: translateY(-5px);
+}
+
+/* The Glowing Border Effect */
+.client-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 2.25rem;
+  z-index: -1;
+  padding: 2px; /* Border width */
+  background: linear-gradient(45deg, #232228, #232228, #232228, var(--card-color));
+  
+  /* Standard Property */
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  
+  /* Vendor Prefix (Chrome/Safari/Edge) */
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+}
+
+/* Card Variants (Colors) */
+.client-card.green { --card-color: #01c3a8; background: radial-gradient(ellipse at right top, rgba(16, 118, 103, 0.5) 0%, #151419 60%); }
+.client-card.blue { --card-color: #1890ff; background: radial-gradient(ellipse at right top, rgba(0, 69, 143, 0.5) 0%, #151419 60%); }
+.client-card.orange { --card-color: #ffb741; background: radial-gradient(ellipse at right top, rgba(255, 183, 65, 0.5) 0%, #151419 60%); }
+.client-card.red { --card-color: #a63d2a; background: radial-gradient(ellipse at right top, rgba(166, 61, 42, 0.5) 0%, #151419 60%); }
+
+/* Card Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5em 1.5em 0 1.5em;
+  width: 100%;
+}
+
+.card-date { color: #ddd; font-size: 0.9rem; }
+.card-icon { color: white; width: 2.5rem; height: 2.5rem; opacity: 0.8; }
+
+/* Card Body */
+.card-body {
+  padding: 0 1.5em;
+  text-align: left;
+  margin-top: 1rem;
+}
+
+.card-body h3 {
+  color: #fff;
+  font-size: 1.4rem;
+  margin-bottom: 0.2em;
+  text-transform: capitalize;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card-body p {
+  color: #ddd;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.5rem;
+}
+
+/* Progress Bar */
+.progress-container {
+  margin-top: 1rem;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.progress-track {
+  width: 100%;
+  background: #363636;
+  height: 6px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 50px;
+  background: var(--card-color);
+  width: 0%; /* Default */
+  transition: width 1s ease;
+}
+
+/* Card Footer */
+.card-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #151419;
+  border-top: 1px solid #292929;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-left-radius: 2.25rem;
+  border-bottom-right-radius: 2.25rem;
+}
+
+.footer-avatars {
+  display: flex;
+  align-items: center;
+}
+
+.footer-avatars li {
+  list-style: none;
+  margin-right: -10px;
+}
+
+.avatar-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #333;
+  border: 2px solid #151419;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: white;
+  font-weight: 700;
+}
+
+.btn-add {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--card-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.btn-add:hover { transform: scale(1.1); }
+
+.btn-countdown {
+  background: #222127;
+  color: #fff;
+  border-radius: 2em;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-countdown:hover {
+  background: var(--card-color);
+  color: #000;
+}
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideDown { from { opacity: 0; height: 0; } to { opacity: 1; height: auto; } }
+
+/* Mobile */
 @media (max-width: 768px) {
-  .form-row-group {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  .clients-grid {
-    grid-template-columns: 1fr;
-  }
+  .form-row-group { grid-template-columns: 1fr; }
+  .clients-grid { grid-template-columns: 1fr; }
 }
