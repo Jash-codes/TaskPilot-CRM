@@ -8,8 +8,8 @@ import {
   Cell,
   LineChart,
   Line,
-  BarChart, // <-- Added BarChart
-  Bar,      // <-- Added Bar
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -35,34 +35,32 @@ const HomePage = () => {
     return <Spinner />;
   }
 
-  // --- STATS CALCULATION ---
+  // --- STATS ---
   const totalClients = clients.length;
   const totalBudget = projects.reduce((acc, p) => acc + (p.budget || 0), 0);
   const completedProjects = projects.filter(p => p.status === 'Completed').length;
   const pendingProjects = projects.filter(p => p.status === 'Pending').length;
   const activeProjects = projects.filter(p => p.status === 'In Progress').length;
 
-  // --- CHART 1 DATA: PIE (Status) ---
+  // --- CHART DATA ---
   const pieData = [
     { name: 'Pending', value: pendingProjects, color: '#f59e0b' },
     { name: 'In Progress', value: activeProjects, color: '#3b82f6' },
     { name: 'Finished', value: completedProjects, color: '#10b981' },
   ].filter(item => item.value > 0);
 
-  // --- CHART 2 DATA: LINE (Recent Projects Budget) ---
   const lineData = projects.slice(0, 5).map((p) => ({
     name: p.title.substring(0, 8) + '...',
     Budget: p.budget,
   }));
 
-  // --- CHART 3 DATA: BAR (Monthly Revenue - Mock Data for Demo) ---
   const revenueData = [
     { month: 'Jan', revenue: 4000 },
     { month: 'Feb', revenue: 3000 },
     { month: 'Mar', revenue: 5500 },
     { month: 'Apr', revenue: 4500 },
     { month: 'May', revenue: 6000 },
-    { month: 'Jun', revenue: totalBudget > 0 ? totalBudget : 7500 }, // Use real total for current month
+    { month: 'Jun', revenue: totalBudget > 0 ? totalBudget : 7500 },
   ];
 
   return (
@@ -73,35 +71,27 @@ const HomePage = () => {
         <p style={{ color: '#8b9bb4' }}>Here's your business overview.</p>
       </div>
 
-      {/* --- TOP STATS ROW --- */}
+      {/* --- TOP STATS --- */}
       <div className="stats-grid-top">
         <div className="admin-card">
-          <div className="admin-card-header">
-            <span className="admin-card-title">Total Clients</span>
-          </div>
+          <div className="admin-card-header"><span className="admin-card-title">Total Clients</span></div>
           <div className="admin-card-value">{totalClients}</div>
         </div>
         <div className="admin-card">
-          <div className="admin-card-header">
-            <span className="admin-card-title">Total Revenue</span>
-          </div>
+          <div className="admin-card-header"><span className="admin-card-title">Total Revenue</span></div>
           <div className="admin-card-value">${totalBudget.toLocaleString()}</div>
         </div>
         <div className="admin-card">
-          <div className="admin-card-header">
-            <span className="admin-card-title">Active Jobs</span>
-          </div>
+          <div className="admin-card-header"><span className="admin-card-title">Active Jobs</span></div>
           <div className="admin-card-value">{activeProjects}</div>
         </div>
         <div className="admin-card">
-          <div className="admin-card-header">
-            <span className="admin-card-title">Finished Jobs</span>
-          </div>
+          <div className="admin-card-header"><span className="admin-card-title">Finished Jobs</span></div>
           <div className="admin-card-value">{completedProjects}</div>
         </div>
       </div>
 
-      {/* --- MIDDLE ROW: PIE & LINE CHARTS --- */}
+      {/* --- MIDDLE ROW: CHARTS --- */}
       <div className="charts-grid">
         
         {/* Project Status Pie */}
@@ -109,7 +99,8 @@ const HomePage = () => {
           <div className="chart-header">
             <h3>Project Status</h3>
           </div>
-          <div style={{ height: '300px', width: '100%' }}>
+          {/* UPDATED: Uses .chart-wrapper class */}
+          <div className="chart-wrapper">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -126,7 +117,7 @@ const HomePage = () => {
                   ))}
                 </Pie>
                 <Tooltip 
-                  contentStyle={{ backgroundColor: '#0b253a', border: '1px solid #1e3a52', borderRadius: '8px' }}
+                  contentStyle={{ backgroundColor: '#0b253a', border: '1px solid #1e3a52', borderRadius: '8px', color: '#fff' }}
                 />
                 <Legend verticalAlign="bottom" height={36}/>
               </PieChart>
@@ -139,14 +130,15 @@ const HomePage = () => {
           <div className="chart-header">
             <h3>Recent Projects Value</h3>
           </div>
-          <div style={{ height: '300px', width: '100%' }}>
+          {/* UPDATED: Uses .chart-wrapper class */}
+          <div className="chart-wrapper">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={lineData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#1e3a52" vertical={false} />
                 <XAxis dataKey="name" tick={{fontSize: 12, fill: '#8b9bb4'}} axisLine={false} tickLine={false} />
                 <YAxis tick={{fontSize: 12, fill: '#8b9bb4'}} axisLine={false} tickLine={false} />
                 <Tooltip 
-                  contentStyle={{ backgroundColor: '#0b253a', border: '1px solid #1e3a52', borderRadius: '8px' }}
+                  contentStyle={{ backgroundColor: '#0b253a', border: '1px solid #1e3a52', borderRadius: '8px', color: '#fff' }}
                 />
                 <Line 
                   type="monotone" 
@@ -163,12 +155,13 @@ const HomePage = () => {
 
       </div>
 
-      {/* --- BOTTOM ROW: REVENUE HISTORY (REPLACED LIVE TRAFFIC) --- */}
+      {/* --- BOTTOM ROW: REVENUE --- */}
       <div className="admin-card" style={{ marginBottom: '2rem' }}>
         <div className="chart-header">
           <h3>Revenue History (6 Months)</h3>
         </div>
-        <div style={{ height: '300px', width: '100%' }}>
+        {/* UPDATED: Uses .chart-wrapper class */}
+        <div className="chart-wrapper">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={revenueData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#1e3a52" vertical={false} />
@@ -176,7 +169,7 @@ const HomePage = () => {
               <YAxis tick={{fontSize: 12, fill: '#8b9bb4'}} axisLine={false} tickLine={false} />
               <Tooltip 
                 cursor={{fill: 'rgba(255,255,255,0.05)'}}
-                contentStyle={{ backgroundColor: '#0b253a', border: '1px solid #1e3a52', borderRadius: '8px' }}
+                contentStyle={{ backgroundColor: '#0b253a', border: '1px solid #1e3a52', borderRadius: '8px', color: '#fff' }}
               />
               <Bar dataKey="revenue" fill="#5C7C89" radius={[4, 4, 0, 0]} barSize={40} />
             </BarChart>

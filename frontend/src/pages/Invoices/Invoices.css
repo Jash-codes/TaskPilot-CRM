@@ -7,7 +7,7 @@
   animation: fadeIn 0.4s ease-out;
 }
 
-/* Header */
+/* --- HEADER --- */
 .invoices-header {
   display: flex;
   justify-content: space-between;
@@ -36,7 +36,7 @@
   border-radius: 50px;
 }
 
-/* Form Container */
+/* --- FORM CONTAINER --- */
 .invoice-form-container {
   background-color: #0b253a;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -46,18 +46,70 @@
   animation: slideDown 0.3s ease-out;
 }
 
+.invoice-form-container label {
+  display: block;
+  color: #8b9bb4;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.form-row-group {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  flex: 1;
+}
+
+/* Items Section */
 .invoice-items-section {
   background: rgba(0,0,0,0.2);
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 8px;
   margin-bottom: 1.5rem;
 }
 
-.item-row {
+.invoice-items-section h4 {
+  color: white;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* --- ITEM TABLE LAYOUT (The Fix) --- */
+
+/* The Header Row */
+.invoice-item-header {
   display: flex;
   gap: 1rem;
   margin-bottom: 0.5rem;
+  color: #8b9bb4; /* Muted text */
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding-left: 0.5rem; /* Align visual start with input padding */
+}
+
+/* The Item Rows */
+.invoice-item-row {
+  display: flex;
+  gap: 1rem;
   align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+/* Column Sizing (Must match inline styles in JSX if any, or control here) */
+.invoice-item-row input[name='description'] { flex: 3; }
+.invoice-item-row input[name='quantity'] { flex: 1; }
+.invoice-item-row input[name='unitPrice'] { flex: 1; }
+
+/* Line Total */
+.item-line-total {
+  width: 60px;
+  text-align: right;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
 .invoice-total {
@@ -68,7 +120,7 @@
   margin: 1rem 0;
 }
 
-/* --- INVOICE LIST (Horizontal Cards) --- */
+/* --- INVOICE LIST --- */
 .invoices-list {
   display: flex;
   flex-direction: column;
@@ -94,7 +146,6 @@
   border-color: var(--color-accent);
 }
 
-/* Left colored strip based on status */
 .invoice-card::before {
   content: '';
   position: absolute;
@@ -151,13 +202,28 @@
   font-size: 0.8rem;
   cursor: pointer;
   transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 .btn-mark-paid:hover { background: #10b981; color: white; }
 
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .invoice-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .invoice-amount { text-align: left; }
-  .invoice-status { margin-left: 0; }
-  .invoice-actions { margin-left: 0; width: 100%; }
-  .btn-mark-paid { width: 100%; }
+  .invoice-status, .invoice-actions { margin-left: 0; }
+  .btn-mark-paid { width: 100%; justify-content: center; }
+  
+  .form-row-group { flex-direction: column; gap: 1rem; }
+  
+  /* Stack items on mobile */
+  .invoice-item-header { display: none; } /* Hide header */
+  .invoice-item-row {
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 1rem;
+  }
+  .invoice-item-row input { min-width: 45%; }
+  .item-line-total { width: 100%; text-align: right; margin-top: 0.5rem; }
 }
