@@ -14,7 +14,9 @@ import LandingPage from './pages/Landing/LandingPage';
 import RegisterPage from './pages/Auth/RegisterPage';
 import LoginPage from './pages/Auth/LoginPage';
 import HomePage from './pages/Dashboard/HomePage';
-import ClientsPage from './pages/Clients/ClientsPage'; // <-- Import
+import ClientsPage from './pages/Clients/ClientsPage';
+import ProjectsPage from './pages/Projects/ProjectsPage'; 
+import ProjectPage from './pages/Projects/ProjectPage'; 
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -48,6 +50,8 @@ function App() {
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<HomePage />} />
              <Route path="/clients" element={<ClientsPage />} /> 
+             <Route path="/projects" element={<ProjectsPage />} /> 
+             <Route path="/project/:id" element={<ProjectPage />} /> 
             </Route>
           </Routes>
         </main>

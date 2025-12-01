@@ -21,11 +21,10 @@
   font-size: 1.75rem;
   font-weight: 700;
   color: white;
-  letter-spacing: -0.025em; /* Tighter tracking for modern look */
+  letter-spacing: -0.025em;
   margin: 0;
 }
 
-/* Add Client Button Override */
 .clients-header .btn {
   background: white;
   color: var(--bg-dark);
@@ -39,13 +38,13 @@
   color: white;
 }
 
-/* --- FORM CONTAINER (The "Drawer") --- */
+/* --- FORM CONTAINER --- */
 .client-form-container {
-  background-color: rgba(31, 73, 89, 0.3); /* Low opacity var(--bg-card) */
+  background-color: rgba(31, 73, 89, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 2rem;
   border-radius: 12px;
-  backdrop-filter: blur(10px); /* Glass effect */
+  backdrop-filter: blur(10px);
   margin-bottom: 2rem;
   animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
@@ -58,7 +57,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* Input Polish */
 .client-form-container input {
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -70,20 +68,20 @@
 .client-form-container input:focus {
   background: rgba(0, 0, 0, 0.4);
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 4px rgba(92, 124, 137, 0.15); /* Soft focus ring */
+  box-shadow: 0 0 0 4px rgba(92, 124, 137, 0.15);
 }
 
 /* --- CLIENTS GRID --- */
 .clients-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); /* Slightly wider cards */
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 1.5rem;
 }
 
-/* --- CARD DESIGN (SaaS Style) --- */
+/* --- CARD DESIGN --- */
 .client-card {
   background-color: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle border */
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   padding: 1.5rem;
   transition: all 0.3s ease;
@@ -91,17 +89,16 @@
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  min-height: 220px; /* Increased height for breathing room */
 }
 
-/* Hover: Lift + Subtle Glow */
 .client-card:hover {
   transform: translateY(-4px);
   border-color: rgba(92, 124, 137, 0.4);
   box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.4);
-  background-color: #235263; /* Slightly lighter on hover */
+  background-color: #235263;
 }
 
-/* Header inside card */
 .client-header {
   display: flex;
   align-items: center;
@@ -114,9 +111,10 @@
 .client-avatar {
   width: 48px;
   height: 48px;
+  min-width: 48px;
   background: rgba(255, 255, 255, 0.05);
   color: var(--color-accent);
-  border-radius: 10px; /* Rounded square instead of circle looks more modern */
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,12 +123,20 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.client-info {
+  flex: 1;
+  min-width: 0; /* Critical for text truncation in flexbox */
+}
+
 .client-info h3 {
   font-size: 1.1rem;
   font-weight: 600;
   color: white;
   margin: 0;
   line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .client-info span {
@@ -140,7 +146,6 @@
   margin-top: 2px;
 }
 
-/* Details Section */
 .client-details {
   display: flex;
   flex-direction: column;
@@ -151,16 +156,20 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: #cbd5e1; /* Lighter gray text */
+  color: #cbd5e1;
   font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .detail-row svg {
   color: var(--color-accent);
   opacity: 0.7;
+  flex-shrink: 0;
 }
 
-/* Action Link at bottom */
+/* --- THE FIX IS HERE --- */
 .view-projects-link {
   margin-top: 1rem;
   padding-top: 1rem;
@@ -168,11 +177,16 @@
   color: var(--color-accent);
   font-size: 0.9rem;
   font-weight: 600;
+  
+  /* Flexbox centering + NO WRAPPING */
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  white-space: nowrap; /* <-- This forces it to stay on one line */
+  
   cursor: pointer;
-  transition: gap 0.2s;
+  transition: all 0.2s;
+  width: fit-content; /* Only take up needed space */
 }
 
 .view-projects-link:hover {
@@ -180,7 +194,7 @@
   color: white;
 }
 
-/* Empty State Styling */
+/* Empty State */
 .clients-grid p {
   grid-column: 1 / -1;
   text-align: center;
@@ -190,7 +204,6 @@
   border: 1px dashed rgba(255, 255, 255, 0.1);
 }
 
-/* Animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -201,7 +214,6 @@
   to { opacity: 1; transform: translateY(0); height: auto; }
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .form-row-group {
     grid-template-columns: 1fr;
@@ -210,4 +222,4 @@
   .clients-grid {
     grid-template-columns: 1fr;
   }
-} 
+}

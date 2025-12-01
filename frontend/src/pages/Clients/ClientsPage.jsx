@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getClients, createClient, reset } from '../../features/clients/clientSlice';
 import { toast } from 'react-toastify';
@@ -8,6 +9,7 @@ import './Clients.css';
 
 const ClientsPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const { clients, isLoading, isError, message } = useSelector((state) => state.clients);
   
   const [showForm, setShowForm] = useState(false);
@@ -100,7 +102,10 @@ const ClientsPage = () => {
                   <span>{client.company || 'Freelance'}</span>
                 </div>
               </div>
-              <div className="client-details">
+              <div 
+                  className="detail-row view-projects-link" 
+                  onClick={() => navigate('/projects')} 
+                >
                 <div className="detail-row">
                   <Mail size={14} /> {client.email}
                 </div>
