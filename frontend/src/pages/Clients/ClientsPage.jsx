@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getClients, createClient, reset } from '../../features/clients/clientSlice';
 import { toast } from 'react-toastify';
-import { Plus, X, MoreHorizontal, ArrowRight } from 'lucide-react';
+import { Plus, X, Building2, Mail, ArrowRight } from 'lucide-react';
 import Spinner from '../../components/Spinner';
 import './Clients.css';
 
@@ -33,7 +33,6 @@ const ClientsPage = () => {
     setShowForm(false);
   };
 
-  // Helper to pick a random card color class
   const getCardColor = (index) => {
     const colors = ['green', 'blue', 'orange', 'red'];
     return colors[index % colors.length];
@@ -43,8 +42,6 @@ const ClientsPage = () => {
 
   return (
     <div className="clients-container">
-      
-      {/* Header */}
       <div className="clients-header">
         <h1>Clients ({clients.length})</h1>
         <button className="btn" onClick={() => setShowForm(!showForm)}>
@@ -53,7 +50,6 @@ const ClientsPage = () => {
         </button>
       </div>
 
-      {/* Form */}
       {showForm && (
         <div className="client-form-container">
           <form onSubmit={onSubmit}>
@@ -70,49 +66,38 @@ const ClientsPage = () => {
         </div>
       )}
 
-      {/* THE NEW CARD GRID */}
       <div className="clients-grid">
         {clients.length > 0 ? (
           clients.map((client, index) => {
-            const cardColor = getCardColor(index); // green, blue, etc.
-            const joinDate = new Date(client.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            const cardColor = getCardColor(index);
             
             return (
               <div key={client._id} className={`client-card ${cardColor}`}>
                 
-                {/* Header */}
-                <div className="card-header">
-                  <div className="date">{joinDate}</div>
-                  <MoreHorizontal className="card-icon" />
-                </div>
-
-                {/* Body */}
-                <div className="card-body">
-                  <h3>{client.name}</h3>
-                  <p>{client.company || 'Independent'}</p>
+                {/* RENAMED CLASS: client-card-body */}
+                <div className="client-card-body">
+                  <h3 className="client-name">{client.name}</h3>
                   
-                  {/* Progress Bar (Visual Flair - Mock Data) */}
-                  <div className="progress-container">
-                    <div className="progress-label">
-                      <span>Project Status</span>
-                      <span>Active</span>
+                  <div className="client-meta">
+                    <div className="meta-row">
+                      <Building2 size={16} />
+                      <span>{client.company || 'Independent'}</span>
                     </div>
-                    <div className="progress-track">
-                      <div className="progress-fill" style={{ width: '75%' }}></div>
+                    <div className="meta-row">
+                      <Mail size={16} />
+                      <span>{client.email}</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Footer */}
-                <div className="card-footer">
-                  <ul className="footer-avatars">
-                    <li><div className="avatar-circle">{client.name.charAt(0)}</div></li>
-                    <div className="btn-add" onClick={() => navigate('/projects')}>
-                      <ArrowRight size={14} />
-                    </div>
-                  </ul>
-                  
-                  <a href={`mailto:${client.email}`} className="btn-countdown">Contact</a>
+                {/* RENAMED CLASS: client-card-footer */}
+                <div className="client-card-footer">
+                  <button 
+                    className="btn-view-project"
+                    onClick={() => navigate('/projects')} 
+                  >
+                    View Projects <ArrowRight size={16} />
+                  </button>
                 </div>
 
               </div>

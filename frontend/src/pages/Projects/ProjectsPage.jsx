@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getProjects, createProject, updateProjectStatus, reset } from '../../features/projects/projectSlice'; // Import updateStatus
+import { getProjects, createProject, updateProjectStatus, reset } from '../../features/projects/projectSlice';
 import { getClients } from '../../features/clients/clientSlice';
 import { toast } from 'react-toastify';
-import { Plus, X, User, ChevronLeft, ChevronRight } from 'lucide-react'; // Import Arrows
+import { Plus, X, User, ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
 import Spinner from '../../components/Spinner';
 import './Projects.css';
 
@@ -39,11 +39,9 @@ const ProjectsPage = () => {
     setShowForm(false);
   };
 
-  // Helper to move project
   const moveProject = (e, project, direction) => {
-    e.stopPropagation(); // Prevent clicking the card (which opens details)
+    e.stopPropagation();
     let newStatus = project.status;
-
     if (project.status === 'Pending' && direction === 'next') newStatus = 'In Progress';
     if (project.status === 'In Progress' && direction === 'prev') newStatus = 'Pending';
     if (project.status === 'In Progress' && direction === 'next') newStatus = 'Completed';
@@ -52,6 +50,13 @@ const ProjectsPage = () => {
     if (newStatus !== project.status) {
       dispatch(updateProjectStatus({ projectId: project._id, status: newStatus }));
     }
+  };
+
+  // Helper for random card colors (based on ID to keep it consistent per card)
+  const getCardColor = (id) => {
+    const colors = ['green', 'blue', 'orange', 'red'];
+    const index = id.charCodeAt(id.length - 1) % 4; // Simple hash
+    return colors[index];
   };
 
   const pendingProjects = projects.filter(p => p.status === 'Pending');
@@ -96,7 +101,7 @@ const ProjectsPage = () => {
           <div className="column-header"><span>To Do</span><span className="column-count">{pendingProjects.length}</span></div>
           <div className="column-content">
             {pendingProjects.map(project => (
-              <ProjectCard key={project._id} project={project} navigate={navigate} onMove={moveProject} />
+              <ProjectCard key={project._id} project={project} navigate={navigate} onMove={moveProject} color={getCardColor(project._id)} />
             ))}
           </div>
         </div>
@@ -106,7 +111,7 @@ const ProjectsPage = () => {
           <div className="column-header"><span>In Progress</span><span className="column-count">{progressProjects.length}</span></div>
           <div className="column-content">
             {progressProjects.map(project => (
-              <ProjectCard key={project._id} project={project} navigate={navigate} onMove={moveProject} />
+              <ProjectCard key={project._id} project={project} navigate={navigate} onMove={moveProject} color={getCardColor(project._id)} />
             ))}
           </div>
         </div>
@@ -116,7 +121,7 @@ const ProjectsPage = () => {
           <div className="column-header"><span>Completed</span><span className="column-count">{completedProjects.length}</span></div>
           <div className="column-content">
             {completedProjects.map(project => (
-              <ProjectCard key={project._id} project={project} navigate={navigate} onMove={moveProject} />
+              <ProjectCard key={project._id} project={project} navigate={navigate} onMove={moveProject} color={getCardColor(project._id)} />
             ))}
           </div>
         </div>
@@ -125,34 +130,43 @@ const ProjectsPage = () => {
   );
 };
 
-// --- UPDATED CARD COMPONENT ---
-const ProjectCard = ({ project, navigate, onMove }) => {
+// --- UPDATED CARD COMPONENT (Matches Clients) ---
+const ProjectCard = ({ project, navigate, onMove, color }) => {
+  const formattedDate = new Date(project.deadline).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
   return (
-    <div className="kanban-card" onClick={() => navigate(`/project/${project._id}`)}>
-      <div className="card-top">
-        <div className="card-title">{project.title}</div>
-        {/* Move Buttons */}
+    <div className={`project-card ${color}`} onClick={() => navigate(`/project/${project._id}`)}>
+      
+      {/* Header: Date + Status/Icon */}
+      <div className="card-header">
+        <span className="card-date">{formattedDate}</span>
+        <Calendar size={16} color="rgba(255,255,255,0.5)" />
+      </div>
+
+      {/* Body: Title + Client */}
+      <div className="card-body">
+        <h3>{project.title}</h3>
+        <p><User size={14} /> {project.client?.name || 'Unknown'}</p>
+      </div>
+
+      {/* Footer: Budget + Arrows */}
+      <div className="card-footer">
+        <span className="budget-badge">${Number(project.budget).toLocaleString()}</span>
+        
         <div className="card-actions">
           {project.status !== 'Pending' && (
-            <button className="btn-move" onClick={(e) => onMove(e, project, 'prev')} title="Move Back">
+            <button className="btn-move" onClick={(e) => onMove(e, project, 'prev')} title="Back">
               <ChevronLeft size={16} />
             </button>
           )}
           {project.status !== 'Completed' && (
-            <button className="btn-move" onClick={(e) => onMove(e, project, 'next')} title="Move Forward">
+            <button className="btn-move" onClick={(e) => onMove(e, project, 'next')} title="Next">
               <ChevronRight size={16} />
             </button>
           )}
         </div>
       </div>
-      
-      <div className="card-client">
-        <User size={14} /> {project.client?.name || 'Unknown'}
-      </div>
-      <div className="card-footer">
-        <span className="card-budget">${Number(project.budget).toLocaleString()}</span>
-        <span className="card-date">{new Date(project.deadline).toLocaleDateString()}</span>
-      </div>
+
     </div>
   );
 };

@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from '../features/auth/authSlice';
-import projectReducer from '../features/projects/projectSlice'; // <-- Import
-import clientReducer from '../features/clients/clientSlice';   // <-- Import
+import projectReducer from '../features/projects/projectSlice'; 
+import clientReducer from '../features/clients/clientSlice';  
+import invoiceReducer from '../features/invoices/invoiceSlice'; 
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    projects: projectReducer, // <-- Add
-    clients: clientReducer,   // <-- Add
+    projects: projectReducer, 
+    clients: clientReducer, 
+    invoices: invoiceReducer,  
   },
 });
