@@ -3,6 +3,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { MessageSquare } from 'lucide-react';
+import { Settings } from 'lucide-react';
 // FIXED IMPORT PATH BELOW:
 import { logout, reset } from '../features/auth/authSlice';
 import {
@@ -55,6 +56,12 @@ const Sidebar = () => {
               <NavLink to="/messages" className={({ isActive }) => (isActive ? 'active' : '')}>
                 <MessageSquare size={20} />
                 <span>Inbox</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/settings" className={({ isActive }) => (isActive ? 'active' : '')}>
+                <Settings size={20} />
+                <span>Settings</span>
               </NavLink>
             </li>
           </ul>
