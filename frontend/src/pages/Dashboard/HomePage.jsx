@@ -8,8 +8,6 @@ import {
   Cell,
   LineChart,
   Line,
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -35,33 +33,30 @@ const HomePage = () => {
     return <Spinner />;
   }
 
-  // --- STATS ---
+  // --- STATS CALCULATION ---
   const totalClients = clients.length;
   const totalBudget = projects.reduce((acc, p) => acc + (p.budget || 0), 0);
   const completedProjects = projects.filter(p => p.status === 'Completed').length;
   const pendingProjects = projects.filter(p => p.status === 'Pending').length;
   const activeProjects = projects.filter(p => p.status === 'In Progress').length;
+  
+  // Estimated Company Value (Mock logic)
+  const companyValue = totalBudget * 1.5;
+  const totalProjects = projects.length || 1;
+  const completionRate = Math.round((completedProjects / totalProjects) * 100);
 
-  // --- CHART DATA ---
+  // --- CHART 1 DATA: PIE (Status) ---
   const pieData = [
     { name: 'Pending', value: pendingProjects, color: '#f59e0b' },
     { name: 'In Progress', value: activeProjects, color: '#3b82f6' },
     { name: 'Finished', value: completedProjects, color: '#10b981' },
   ].filter(item => item.value > 0);
 
+  // --- CHART 2 DATA: LINE (Recent Projects Budget) ---
   const lineData = projects.slice(0, 5).map((p) => ({
     name: p.title.substring(0, 8) + '...',
     Budget: p.budget,
   }));
-
-  const revenueData = [
-    { month: 'Jan', revenue: 4000 },
-    { month: 'Feb', revenue: 3000 },
-    { month: 'Mar', revenue: 5500 },
-    { month: 'Apr', revenue: 4500 },
-    { month: 'May', revenue: 6000 },
-    { month: 'Jun', revenue: totalBudget > 0 ? totalBudget : 7500 },
-  ];
 
   return (
     <div className="dashboard-container">
@@ -71,27 +66,52 @@ const HomePage = () => {
         <p style={{ color: '#8b9bb4' }}>Here's your business overview.</p>
       </div>
 
-      {/* --- TOP STATS --- */}
+      {/* --- TOP STATS ROW --- */}
       <div className="stats-grid-top">
+        {/* Card 1 */}
         <div className="admin-card">
-          <div className="admin-card-header"><span className="admin-card-title">Total Clients</span></div>
+          <div className="admin-card-header">
+            <span className="admin-card-title">Total Clients</span>
+            <span className="trend-badge trend-up">▲ 12%</span>
+          </div>
           <div className="admin-card-value">{totalClients}</div>
+          <div className="stat-circle circle-blue">{totalClients}</div>
         </div>
+
+        {/* Card 2 */}
         <div className="admin-card">
-          <div className="admin-card-header"><span className="admin-card-title">Total Revenue</span></div>
+          <div className="admin-card-header">
+            <span className="admin-card-title">Total Budget</span>
+            <span className="trend-badge trend-down">▼ 5%</span>
+          </div>
           <div className="admin-card-value">${totalBudget.toLocaleString()}</div>
+          <div className="stat-circle circle-red">
+            {Math.floor(Math.random() * 50) + 10}
+          </div>
         </div>
+
+        {/* Card 3 */}
         <div className="admin-card">
-          <div className="admin-card-header"><span className="admin-card-title">Active Jobs</span></div>
-          <div className="admin-card-value">{activeProjects}</div>
+          <div className="admin-card-header">
+            <span className="admin-card-title">Est. Value</span>
+            <span className="trend-badge trend-up">▲ $1.2k</span>
+          </div>
+          <div className="admin-card-value">${companyValue.toLocaleString()}</div>
+          <div className="stat-circle circle-orange">72</div>
         </div>
+
+        {/* Card 4 */}
         <div className="admin-card">
-          <div className="admin-card-header"><span className="admin-card-title">Finished Jobs</span></div>
-          <div className="admin-card-value">{completedProjects}</div>
+          <div className="admin-card-header">
+            <span className="admin-card-title">Completed Work</span>
+            <span className="trend-badge trend-up">▲ {completedProjects}</span>
+          </div>
+          <div className="admin-card-value">{completedProjects} Jobs</div>
+          <div className="stat-circle circle-green">{completionRate}%</div>
         </div>
       </div>
 
-      {/* --- MIDDLE ROW: CHARTS --- */}
+      {/* --- MIDDLE ROW: PIE & LINE CHARTS --- */}
       <div className="charts-grid">
         
         {/* Project Status Pie */}
@@ -99,7 +119,6 @@ const HomePage = () => {
           <div className="chart-header">
             <h3>Project Status</h3>
           </div>
-          {/* UPDATED: Uses .chart-wrapper class */}
           <div className="chart-wrapper">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -130,7 +149,6 @@ const HomePage = () => {
           <div className="chart-header">
             <h3>Recent Projects Value</h3>
           </div>
-          {/* UPDATED: Uses .chart-wrapper class */}
           <div className="chart-wrapper">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={lineData}>
@@ -155,27 +173,7 @@ const HomePage = () => {
 
       </div>
 
-      {/* --- BOTTOM ROW: REVENUE --- */}
-      <div className="admin-card" style={{ marginBottom: '2rem' }}>
-        <div className="chart-header">
-          <h3>Revenue History (6 Months)</h3>
-        </div>
-        {/* UPDATED: Uses .chart-wrapper class */}
-        <div className="chart-wrapper">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={revenueData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e3a52" vertical={false} />
-              <XAxis dataKey="month" tick={{fontSize: 12, fill: '#8b9bb4'}} axisLine={false} tickLine={false} />
-              <YAxis tick={{fontSize: 12, fill: '#8b9bb4'}} axisLine={false} tickLine={false} />
-              <Tooltip 
-                cursor={{fill: 'rgba(255,255,255,0.05)'}}
-                contentStyle={{ backgroundColor: '#0b253a', border: '1px solid #1e3a52', borderRadius: '8px', color: '#fff' }}
-              />
-              <Bar dataKey="revenue" fill="#5C7C89" radius={[4, 4, 0, 0]} barSize={40} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
+      {/* REVENUE CHART REMOVED */}
 
     </div>
   );

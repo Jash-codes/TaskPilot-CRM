@@ -1,0 +1,121 @@
+/* src/pages/Signature/Signature.css */
+
+.signature-page-container {
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.signature-header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1rem;
+}
+
+.signature-header h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 0.5rem 0;
+}
+
+.signature-header p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+/* Card Container */
+.signature-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* The Drawing Area */
+.signature-pad-wrapper {
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background-color: white; /* Must be white for pen visibility */
+  overflow: hidden;
+  height: 300px;
+  position: relative;
+  transition: border-color 0.2s;
+}
+
+.signature-pad-wrapper:hover {
+  border-color: var(--color-accent);
+}
+
+.signature-canvas {
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+/* Controls */
+.signature-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-clear {
+  background: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #ef4444;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-clear:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.btn-save {
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(92, 124, 137, 0.4);
+  transition: all 0.2s;
+}
+
+.btn-save:hover {
+  transform: translateY(-2px);
+  background-color: var(--color-accent-hover);
+}
+
+/* Preview Section */
+.signature-result {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  animation: slideDown 0.3s ease-out;
+}
+
+.signature-result h3 {
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.signature-image {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 300px;
+  margin: 0 auto;
+  border: 4px solid var(--color-accent);
+}

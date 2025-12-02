@@ -22,6 +22,7 @@ import CalendarPage from './pages/Calendar/CalendarPage';
 import ProfilePage from './pages/Profile/ProfilePage';
 import InboxPage from './pages/Inbox/InboxPage';
 import SettingsPage from './pages/Settings/SettingsPage';
+import SignaturePage from './pages/Signature/SignaturePage'; 
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -62,6 +63,7 @@ function App() {
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/messages" element={<InboxPage />} />
               <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/sign" element={<SignaturePage />} />
             </Route>
           </Routes>
         </main>
