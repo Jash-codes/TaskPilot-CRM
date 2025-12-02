@@ -2,16 +2,17 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { MessageSquare } from 'lucide-react';
 // FIXED IMPORT PATH BELOW:
-import { logout, reset } from '../features/auth/authSlice'; 
-import { 
-  LayoutDashboard, 
-  Users, 
-  FolderOpen, 
-  FileText, 
-  PenTool, 
+import { logout, reset } from '../features/auth/authSlice';
+import {
+  LayoutDashboard,
+  Users,
+  FolderOpen,
+  FileText,
+  PenTool,
   LogOut,
-  Calendar 
+  Calendar
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -34,7 +35,7 @@ const Sidebar = () => {
 
       {/* Navigation */}
       <nav className="sidebar-nav">
-        
+
         <div className="nav-group">
           <h3>Main Menu</h3>
           <ul>
@@ -50,10 +51,16 @@ const Sidebar = () => {
                 <span>Calendar</span>
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/messages" className={({ isActive }) => (isActive ? 'active' : '')}>
+                <MessageSquare size={20} />
+                <span>Inbox</span>
+              </NavLink>
+            </li>
           </ul>
         </div>
 
-        
+
 
         <div className="nav-group">
           <h3>CRM</h3>
