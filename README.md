@@ -58,3 +58,64 @@ Follow these steps to run the project locally.
 ```bash
 git clone : https://github.com/Jash-codes/TaskPilot-CRM.git
 cd taskpilot
+
+2. Backend Setup
+Navigate to the backend folder and install dependencies.
+
+cd backend
+npm install
+
+Configure Environment Variables: Create a .env file in the backend folder and add:
+PORT=5001
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_super_secret_key
+
+Start the Backend Server:
+npm run dev
+Server will run on http://localhost:5001
+
+3. Frontend Setup
+Open a new terminal, navigate to the frontend folder, and install dependencies.
+cd frontend
+npm install
+
+Start the Frontend:
+npm run dev
+Client will run on http://localhost:5173
+
+📂 Project Structure
+
+taskpilot/
+├── backend/
+│   ├── config/         # DB Connection
+│   ├── controllers/    # Logic for Users, Clients, Projects, Invoices
+│   ├── middleware/     # Auth protection
+│   ├── models/         # Mongoose Schemas
+│   ├── routes/         # API Routes
+│   └── server.js       # Entry point
+│
+└── frontend/
+    ├── src/
+    │   ├── app/        # Redux Store configuration
+    │   ├── assets/     # Images and static files
+    │   ├── components/ # Reusable UI (Sidebar, Header, Spinner)
+    │   ├── features/   # Redux Slices & Services
+    │   ├── pages/      # Main Views (Dashboard, Kanban, Invoices)
+    │   ├── App.jsx     # Main Router
+    │   └── index.css   # Global Styles & Theme Variables
+
+🔐 Accounts & Testing
+You can register a new account on the /register page. Once logged in, you will have access to the full dashboard.
+
+Demo Flow:
+Register a user.
+Go to Clients -> Add a new Client.
+Go to Projects -> Create a Project assigned to that Client.
+Go to Invoices -> Generate an invoice for that Project.
+Check the Dashboard to see your stats update automatically!
+
+🤝 Contributing
+Contributions are welcome! Please fork the repository and create a pull request for any feature enhancements.
+
+📄 License
+This project is licensed under the MIT License.
