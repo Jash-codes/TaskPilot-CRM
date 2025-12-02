@@ -1,5 +1,7 @@
+// src/components/Header.jsx
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const { user } = useSelector((state) => state.auth);
@@ -13,7 +15,8 @@ const Header = () => {
         </div>
 
         {/* User Profile Snippet (Right Side) */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {/* Wrapped entire block in Link to make it clickable */}
+        <Link to="/profile" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
           <div style={{ textAlign: 'right' }}>
             <div style={{ fontSize: '0.9rem', fontWeight: '600', color: 'white' }}>
               {user ? user.name : 'Guest'}
@@ -29,7 +32,7 @@ const Header = () => {
           }}>
             {user ? user.name.charAt(0).toUpperCase() : 'G'}
           </div>
-        </div>
+        </Link>
       </div>
     </header>
   );

@@ -10,7 +10,8 @@ import {
   FolderOpen, 
   FileText, 
   PenTool, 
-  LogOut 
+  LogOut,
+  Calendar 
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -43,8 +44,16 @@ const Sidebar = () => {
                 <span>Dashboard</span>
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/calendar" className={({ isActive }) => (isActive ? 'active' : '')}>
+                <Calendar size={20} />
+                <span>Calendar</span>
+              </NavLink>
+            </li>
           </ul>
         </div>
+
+        
 
         <div className="nav-group">
           <h3>CRM</h3>

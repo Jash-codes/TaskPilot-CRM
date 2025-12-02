@@ -18,6 +18,8 @@ import ClientsPage from './pages/Clients/ClientsPage';
 import ProjectsPage from './pages/Projects/ProjectsPage'; 
 import ProjectPage from './pages/Projects/ProjectPage'; 
 import InvoicesPage from './pages/Invoices/InvoicesPage';
+import CalendarPage from './pages/Calendar/CalendarPage'; 
+import ProfilePage from './pages/Profile/ProfilePage';
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -54,6 +56,8 @@ function App() {
              <Route path="/projects" element={<ProjectsPage />} /> 
              <Route path="/project/:id" element={<ProjectPage />} /> 
              <Route path="/invoices" element={<InvoicesPage />} />
+             <Route path="/calendar" element={<CalendarPage />} />
+             <Route path="/profile" element={<ProfilePage />} />
             </Route>
           </Routes>
         </main>

@@ -1,0 +1,193 @@
+/* src/pages/Calendar/Calendar.css */
+
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  height: calc(100vh - 100px); /* Fit within dashboard */
+  animation: fadeIn 0.5s ease-out;
+}
+
+.calendar-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  overflow: hidden;
+  height: 600px; /* Fixed height for compact look */
+}
+
+/* --- LEFT SIDEBAR (Green Part in your example -> Accent Color) --- */
+.calendar-sidebar {
+  width: 350px;
+  background-color: var(--color-accent); /* Use Theme Accent */
+  color: white;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.current-day-number {
+  font-size: 8rem;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.current-day-name {
+  font-size: 2rem;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.sidebar-events h3 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding-bottom: 0.5rem;
+}
+
+.event-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.event-list li {
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.create-event-btn {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 0.8rem;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.create-event-btn:hover {
+  background: white;
+  color: var(--color-accent);
+}
+
+/* --- RIGHT SIDE (Calendar Grid) --- */
+.calendar-main {
+  flex-grow: 1;
+  background-color: #fff; /* White bg for contrast as per design */
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.calendar-main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.year-display {
+  font-size: 1.5rem;
+  color: #ccc;
+  font-weight: 700;
+}
+
+.month-selector {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #aaa;
+  font-weight: 600;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.month-item {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.month-item:hover { color: var(--color-accent); }
+.month-item.active { color: var(--color-accent); transform: scale(1.1); }
+
+/* Days Grid */
+.calendar-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  flex-grow: 1;
+}
+
+.day-label {
+  color: #aaa;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.date-cell {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border-radius: 50%;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.date-cell:hover {
+  background-color: #f0f0f0;
+}
+
+.date-cell.active {
+  background-color: var(--color-accent);
+  color: white;
+  box-shadow: 0 4px 10px rgba(92, 124, 137, 0.4);
+}
+
+.date-cell.has-event::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  width: 6px;
+  height: 6px;
+  background-color: #ef4444; /* Red dot for event */
+  border-radius: 50%;
+}
+
+.date-empty { pointer-events: none; }
+
+/* Custom Scrollbar for Event List */
+.event-list::-webkit-scrollbar { width: 4px; }
+.event-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 4px; }
