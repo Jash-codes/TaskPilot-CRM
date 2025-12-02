@@ -1,121 +1,195 @@
 
-**Taskpilot** is a comprehensive Customer Relationship Management (CRM) and Business Operating System designed specifically for freelancers and solo agencies. It unifies project management, client relations, financial tracking, and productivity tools into a single, high-performance dark-mode interface.
+# 🚀 Taskpilot - Freelancer CRM & Business OS
+
+**Taskpilot** is a comprehensive Customer Relationship Management (CRM) and Business Operating System designed for freelancers and solo agencies. It unifies project management, client relations, financial tracking, and productivity tools into a single, high-performance dark-mode interface.
 
 ---
 
 ## ✨ Key Features
 
 ### 📊 **Dashboard**
-- Real-time overview of business health.
-- Visual charts for Revenue History, Project Status, and Completion Rates.
-- Quick stats for active clients, pending invoices, and total budget.
+
+* Real-time business overview
+* Revenue history charts
+* Project status pie charts
+* Completion rate gauges
+* Quick stats: active clients, pending invoices, total budget
 
 ### 👥 **Client CRM**
-- Complete client database management.
-- **CSV Import/Export:** Bulk upload clients or backup your data.
-- "View Projects" shortcut to see work associated with specific clients.
-- Futuristic, glowing card UI.
+
+* Centralized client management
+* CSV import/export support
+* Quick action: View Projects
+* Futuristic UI with glassmorphism
 
 ### 📁 **Project Management (Kanban)**
-- **Kanban Board:** Drag-and-drop style workflow (To Do -> In Progress -> Completed).
-- **Project Details:** Deep dive into projects with scope, budget, and deadlines.
-- **Task Checklist:** Interactive task management with add/delete/complete functionality.
+
+* Trello-like drag & drop Kanban board
+* Detailed project view with budget, deadlines, scope
+* Interactive task checklist
 
 ### 💰 **Financials**
-- **Invoice Generator:** Create professional invoices with dynamic line items.
-- **Automatic Calculations:** Real-time total calculation.
-- **Status Tracking:** Mark invoices as Paid or Pending.
+
+* Invoice generator
+* Dynamic line items (qty, price)
+* Auto total calculation
+* Payment status tracking
 
 ### 🛠️ **Productivity Tools**
-- **E-Signature:** Digital signature pad for signing contracts (Canvas API).
-- **Calendar:** Auto-synced view of Project Deadlines and Invoice Due Dates.
-- **Inbox:** Real-time chat interface to communicate with clients.
+
+* E-Signature pad (HTML5 Canvas)
+* Calendar with synced deadlines
+* Inbox (simulated real-time chat UI)
+* Settings: profile & password management
 
 ---
 
 ## 💻 Tech Stack
 
-**Frontend:**
-- **React (Vite):** Fast, modern UI development.
-- **Redux Toolkit:** Global state management (Auth, Projects, Clients, Invoices).
-- **Recharts:** Data visualization and charts.
-- **Lucide React:** Modern icon set.
-- **CSS3:** Custom "Extra O" Dark Theme (Glassmorphism, Grid Layouts).
+### **Frontend**
 
-**Backend:**
-- **Node.js & Express:** RESTful API architecture.
-- **MongoDB (Mongoose):** NoSQL database for flexible data storage.
-- **JWT (JSON Web Tokens):** Secure authentication.
-- **Multer & CSV-Parser:** File upload and processing.
+* React (Vite)
+* Redux Toolkit
+* CSS3 (Variables, Grid, Flexbox, Glassmorphism)
+* Recharts
+* Lucide React
+* Framer Motion
+
+### **Backend**
+
+* Node.js
+* Express.js
+* MongoDB (Mongoose)
+* JWT, bcryptjs
+* Multer, CSV-Parser
 
 ---
 
 ## 🚀 Getting Started
 
-Follow these steps to run the project locally.
+### **1. Clone the Repository**
 
-### 1. Clone the Repository
 ```bash
-git clone : https://github.com/Jash-codes/TaskPilot-CRM.git
-cd taskpilot
+git clone https://github.com/Jash-codes/TaskPilot-CRM.git
+cd TaskPilot-CRM
+```
 
-## 2. Backend Setup ##
-Navigate to the backend folder and install dependencies.
+---
 
+## 🔧 Backend Setup
+
+Navigate to the backend folder:
+
+```bash
 cd backend
 npm install
+```
 
-Configure Environment Variables: Create a .env file in the backend folder and add:
+### **Create `.env` file**
+
+```
 PORT=5001
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_super_secret_key
+MONGO_URI=your_mongodb_connection_string_here
+JWT_SECRET=your_super_secret_key_here
+```
 
-Start the Backend Server:
+### **Start Backend Server**
+
+```bash
 npm run dev
-Server will run on http://localhost:5001
+```
 
-3. Frontend Setup
-Open a new terminal, navigate to the frontend folder, and install dependencies.
+Backend runs at: **[http://localhost:5001](http://localhost:5001)**
+
+---
+
+## 🖥️ Frontend Setup
+
+Open a new terminal:
+
+```bash
 cd frontend
 npm install
+```
 
-Start the Frontend:
+### **Start Frontend**
+
+```bash
 npm run dev
-Client will run on http://localhost:5173
+```
 
-📂 Project Structure
+Frontend runs at: **[http://localhost:5173](http://localhost:5173)**
 
+---
+
+## 📂 Project Structure
+
+```
 taskpilot/
 ├── backend/
-│   ├── config/         # DB Connection
-│   ├── controllers/    # Logic for Users, Clients, Projects, Invoices
-│   ├── middleware/     # Auth protection
+│   ├── config/         # Database configuration
+│   ├── controllers/    # Logic for Users, Clients, Projects, Invoices, Messages
+│   ├── middleware/     # Authentication & Error handling
 │   ├── models/         # Mongoose Schemas
 │   ├── routes/         # API Routes
 │   └── server.js       # Entry point
 │
 └── frontend/
     ├── src/
-    │   ├── app/        # Redux Store configuration
-    │   ├── assets/     # Images and static files
-    │   ├── components/ # Reusable UI (Sidebar, Header, Spinner)
-    │   ├── features/   # Redux Slices & Services
-    │   ├── pages/      # Main Views (Dashboard, Kanban, Invoices)
-    │   ├── App.jsx     # Main Router
-    │   └── index.css   # Global Styles & Theme Variables
+    │   ├── app/        # Redux store setup
+    │   ├── assets/     # Images, logos
+    │   ├── components/ # Sidebar, Header, Spinner, PrivateRoute, etc.
+    │   ├── features/   # Redux slices & services
+    │   ├── pages/      # Dashboard, Clients, Projects, Invoices, etc.
+    │   ├── App.jsx     # Routing & Layout
+    │   └── index.css   # Global styling + theme variables
+```
 
-🔐 Accounts & Testing
-You can register a new account on the /register page. Once logged in, you will have access to the full dashboard.
+---
 
-Demo Flow:
-Register a user.
-Go to Clients -> Add a new Client.
-Go to Projects -> Create a Project assigned to that Client.
-Go to Invoices -> Generate an invoice for that Project.
-Check the Dashboard to see your stats update automatically!
+## 🔐 Accounts & Testing
 
-🤝 Contributing
-Contributions are welcome! Please fork the repository and create a pull request for any feature enhancements.
+You can register a new account at **/register**.
 
-📄 License
-This project is licensed under the MIT License.
+### Recommended Demo Flow:
+
+1. Register a new user
+2. Add a Client (ex: Tech Corp)
+3. Create a Project linked to the client
+4. Add tasks inside the project
+5. Generate an invoice for that project
+6. Visit Dashboard → watch charts update
+
+---
+
+## 🤝 Contributing
+
+Contributions are always welcome!
+
+### Steps:
+
+1. Fork the repository
+2. Create your branch:
+
+   ```bash
+   git checkout -b feature/AmazingFeature
+   ```
+3. Commit changes:
+
+   ```bash
+   git commit -m "Add some AmazingFeature"
+   ```
+4. Push to your branch:
+
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+
