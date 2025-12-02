@@ -59,7 +59,7 @@ Follow these steps to run the project locally.
 git clone : https://github.com/Jash-codes/TaskPilot-CRM.git
 cd taskpilot
 
-2. Backend Setup
+## 2. Backend Setup ##
 Navigate to the backend folder and install dependencies.
 
 cd backend
